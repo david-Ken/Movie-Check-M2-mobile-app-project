@@ -39,6 +39,7 @@ export default class Login extends Component {
           value={this.state.password}
         />
         <Button title="Login" onPress={this.handleLogin} />
+
         <Button
           title="Don't have an account? Sign Up"
           onPress={() => this.props.navigation.navigate("SignUp")}
