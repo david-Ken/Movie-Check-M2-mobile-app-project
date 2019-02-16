@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "541913884322",
+    "firebase_url": "https://movie-check-5ba56.firebaseio.com",
+    "project_id": "movie-check-5ba56",
+    "storage_bucket": "movie-check-5ba56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541913884322:android:9be91f1b03a5714f",
+        "android_client_info": {
+          "package_name": "com.david.movieswatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541913884322-rlad6g5b1jpddikftqb7tn9mr5nra8ge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACfjZ13l9qQuN-rhWAmPG54Q8F_vXOI4E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
