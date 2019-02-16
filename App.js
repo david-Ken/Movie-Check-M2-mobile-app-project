@@ -6,11 +6,12 @@ import {
   createStackNavigator,
   createAppContainer
 } from "react-navigation";
+
 // import the different screens
-import Loading from "./Loading";
-import SignUp from "./SignUp";
-import Login from "./Login";
-import Main from "./Main";
+import Loading from "./app/components/Loading/Loading";
+import SignUp from "./app/components/SignUp/SignUp";
+import Login from "./app/components/Login/Login";
+import Main from "./app/components/Main/Main";
 // create our app's navigation stack
 
 export default createAppContainer(

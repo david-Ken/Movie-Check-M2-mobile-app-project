@@ -8,7 +8,7 @@ export default class Login extends Component {
 
   //Logging an already existing user in
   handleLogin = () => {
-    const { email, pasword } = this.state;
+    const { email, password } = this.state;
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
