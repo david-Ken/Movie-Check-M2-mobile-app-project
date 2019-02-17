@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, TextInput, View, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Button,
+  TouchableHighlight
+} from "react-native";
 import firebase from "react-native-firebase";
 
 export default class SignUp extends Component {
@@ -22,6 +29,7 @@ export default class SignUp extends Component {
           <Text style={{ color: "red" }}>{this.state.errorMessage}</Text>
         )}
         <TextInput
+          style={styles.input}
           placeholder="Email"
           autoCapitalize="none"
           style={styles.textInput}
@@ -29,6 +37,7 @@ export default class SignUp extends Component {
           value={this.state.email}
         />
         <TextInput
+          style={styles.input}
           secureTextEntry
           placeholder="Password"
           autoCapitalize="none"
@@ -37,6 +46,7 @@ export default class SignUp extends Component {
           value={this.state.password}
         />
         <Button title="Sign Up" onPress={this.handleSignUp} />
+
         <Button
           title="Already have an account? Login"
           onPress={() => this.props.navigation.navigate("Login")}

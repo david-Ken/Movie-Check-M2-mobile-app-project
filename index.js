@@ -1,7 +1,7 @@
 /** @format */
 
 import { AppRegistry } from "react-native";
-//import App from "./App";
+import App from "./App";
 import { name as appName } from "./app.json";
 import React, { Component } from "react";
 
@@ -27,4 +27,4 @@ class Starter extends Component {
   }
 }
 
-AppRegistry.registerComponent(appName, () => Starter);
+AppRegistry.registerComponent(appName, () => App);
