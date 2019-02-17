@@ -4,7 +4,7 @@ import { StyleSheet, Platform, Image, Text, View, Button } from "react-native";
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import firebase from "react-native-firebase";
 
-import Icon from "react-native-vector-icons/Ionicons/";
+//import Icon from "react-native-vector-icons/Ionicons/";
 import Saved from "../Screens/Saved";
 import Inbox from "../Screens/Inbox";
 import Trips from "../Screens/Trips";
@@ -36,16 +36,9 @@ class Main extends Component {
   }
 }
 
-/* const TabNavigator = createBottomTabNavigator({
-  Home: HomeScreen,
-  Settings: SettingsScreen,
-});
-
-export default createAppContainer(TabNavigator); */
-
 export default createBottomTabNavigator({
   Explore: {
-    screen: Explore /*,
+    screen: Explore /* ,
     navigationOptions: {
       tabBarLabel: "Explore" ,
        tabBarIcon: ({ tinColor }) => (
