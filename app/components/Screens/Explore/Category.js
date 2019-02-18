@@ -6,7 +6,7 @@ class Category extends Component {
     return (
       <View
         style={{
-          height: 130,
+          height: 300,
           width: 130,
           marginLeft: 20,
           borderWidth: 0.5,
@@ -24,7 +24,7 @@ class Category extends Component {
             }}
           />
         </View>
-        <View style={{ flex: 1, paddingLeft: 10, paddingTop: 10 }}>
+        <View style={{ flex: 1, paddingLeft: 40, paddingTop: 10 }}>
           <Text>{this.props.name}</Text>
         </View>
       </View>

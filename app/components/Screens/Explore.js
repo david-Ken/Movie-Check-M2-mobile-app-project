@@ -38,6 +38,7 @@ class Explore extends Component {
               borderBottomColor: "#dddddd"
             }}
           >
+            {/* start : search bar  */}
             <View
               style={{
                 flexDirection: "row",
@@ -53,12 +54,13 @@ class Explore extends Component {
               <Icon name="ios-search" size={20} />
               <TextInput
                 underlineColorAndroid="transparent"
-                placeholder="Try  New Dehli"
+                placeholder="Search For Movies"
                 placeholderTextColor="grey"
                 style={{ flex: 1, fontWeigth: "700", backgroundColor: "white" }}
               />
             </View>
-            {/*@TODO : fix ui problem here*/}
+            {/* end : search bar  */}
+            {/*start TAGS: fix ui problem here*/}
             <View
               style={{
                 flexDirection: "row",
@@ -108,7 +110,7 @@ class Explore extends Component {
                 </Text>
               </View>
             </View>
-            {/*@TODO : fix ui problem above here*/}
+            {/*end TAG : FIX issu here*/}
           </View>
 
           <ScrollView scrollEventThrottle={16}>
@@ -122,31 +124,46 @@ class Explore extends Component {
               >
                 Want to discover movies, David ?
               </Text>
-              <View style={{ height: 130, marginTop: 20 }}>
+              {/* start : CATEGORY  */}
+              <View style={{ height: 220, marginTop: 20 }}>
                 <ScrollView
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                 >
                   <Category
-                    imageUri={require("../../assets/home.jpg")}
-                    name="Home"
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Comedy"
                   />
                   <Category
-                    imageUri={require("../../assets/experiences.jpg")}
-                    name="Experiences"
+                    imageUri={require("../../assets/Posters/1.jpg")}
+                    name="Sci-fi"
                   />
                   <Category
-                    imageUri={require("../../assets/restaurant.jpg")}
-                    name="Restaurant"
+                    imageUri={require("../../assets/Posters/2.jpg")}
+                    name="Horror"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/3.jpg")}
+                    name="Romance"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/4.jpg")}
+                    name="Action"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/14.jpg")}
+                    name="Fantasy"
                   />
                 </ScrollView>
               </View>
+              {/* end : CATEGORY  */}
+              {/* start : big image section  */}
               <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
                 <Text style={{ fontSize: 24, fontWeight: "700" }}>
                   Introducing Airbnb Plus
                 </Text>
                 <Text style={{ fontWeight: "100", marginTop: 10 }}>
-                  A new selection of bonus verified for quality & confort
+                  Be the first one to see latest movies trailers & information
                 </Text>
                 <View style={{ width: width - 40, height: 200, marginTop: 20 }}>
                   <Image
@@ -157,14 +174,17 @@ class Explore extends Component {
                       resizeMode: "cover",
                       borderRadius: 5,
                       borderWidth: 1,
-                      borderColor: "#dddddd"
+                      borderColor: "#dddddd",
+                      resizeMode: "cover"
                     }}
-                    source={require("../../assets/home.jpg")}
+                    source={require("../../assets/Posters/big.jpg")}
                   />
                 </View>
               </View>
+              {/* end : big image section  */}
             </View>
 
+            {/* start : two section image  */}
             <View style={{ marginTop: 40 }}>
               <Text
                 style={{
@@ -214,6 +234,7 @@ class Explore extends Component {
                 />
               </View>
             </View>
+            {/* end : two section image  */}
           </ScrollView>
         </View>
       </SafeAreaView>
