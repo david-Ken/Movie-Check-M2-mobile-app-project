@@ -38,28 +38,6 @@ class Explore extends Component {
               borderBottomColor: "#dddddd"
             }}
           >
-            {/* start : search bar  */}
-            <View
-              style={{
-                flexDirection: "row",
-                padding: 10,
-                backgroundColor: "white",
-                marginHorizontal: 20,
-                shadowOffset: { width: 0, heigth: 0 },
-                shadowOpacity: 0.2,
-                elevation: 1,
-                marginTop: Platform.OS == "android" ? 30 : null
-              }}
-            >
-              <Icon name="ios-search" size={20} />
-              <TextInput
-                underlineColorAndroid="transparent"
-                placeholder="Search For Movies"
-                placeholderTextColor="grey"
-                style={{ flex: 1, fontWeigth: "700", backgroundColor: "white" }}
-              />
-            </View>
-            {/* end : search bar  */}
             {/*start TAGS: fix ui problem here*/}
             <View
               style={{
@@ -130,10 +108,90 @@ class Explore extends Component {
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                 >
+                  {/* Movies per category */}
+                  {/*     <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Action"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Adventure"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Animation"
+                  />
                   <Category
                     imageUri={require("../../assets/Posters/0.jpg")}
                     name="Comedy"
                   />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Crime"
+                  />
+
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Documentary"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Drama"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Family"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Fantasy"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="History"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Horror"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Music"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Mystery"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Romance"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Sci-fi"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="TV Movie"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Thriller"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="War"
+                  />
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Western"
+                  /> */}
+
+                  <Category
+                    imageUri={require("../../assets/Posters/0.jpg")}
+                    name="Comedy"
+                  />
+
                   <Category
                     imageUri={require("../../assets/Posters/1.jpg")}
                     name="Sci-fi"
@@ -160,7 +218,7 @@ class Explore extends Component {
               {/* start : big image section  */}
               <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
                 <Text style={{ fontSize: 24, fontWeight: "700" }}>
-                  Introducing Airbnb Plus
+                  Introducing Trailers Plus
                 </Text>
                 <Text style={{ fontWeight: "100", marginTop: 10 }}>
                   Be the first one to see latest movies trailers & information
@@ -193,7 +251,7 @@ class Explore extends Component {
                   paddingHorizontal: 20
                 }}
               >
-                Home around world
+                Find Movies by category
               </Text>
               <View
                 style={{
@@ -204,34 +262,30 @@ class Explore extends Component {
                   justifyContent: "space-between"
                 }}
               >
+                <Home width={width} type="Action" id={28} rating={4} />
+                <Home width={width} type="Adventure" id={12} rating={4} />
+                <Home width={width} type="Animation" id={16} rating={4} />
+                <Home width={width} type="Comedy" id={35} rating={4} />
+                <Home width={width} type="Crime" id={80} rating={4} />
+                <Home width={width} type="Documentary" id={99} rating={4} />
+                <Home width={width} type="Drama" id={18} rating={4} />
+                <Home width={width} type="Family" id={10751} rating={4} />
+                <Home width={width} type="Fantasy" id={14} rating={4} />
+                <Home width={width} type="History" id={36} rating={4} />
+                <Home width={width} type="Horror" id={27} rating={4} />
+                <Home width={width} type="Music" id={10402} rating={4} />
+                <Home width={width} type="Mystery" id={9648} rating={4} />
+                <Home width={width} type="Romance" id={10749} rating={4} />
                 <Home
                   width={width}
-                  name="The Cozy Place"
-                  type="PRIVATE ROOM - 2BEDS"
-                  price={82}
+                  type="Science Fiction"
+                  id={878}
                   rating={4}
                 />
-                <Home
-                  width={width}
-                  name="The Cozy Place"
-                  type="PRIVATE ROOM - 2BEDS"
-                  price={82}
-                  rating={4}
-                />
-                <Home
-                  width={width}
-                  name="The Cozy Place"
-                  type="PRIVATE ROOM - 2BEDS"
-                  price={82}
-                  rating={4}
-                />
-                <Home
-                  width={width}
-                  name="The Cozy Place"
-                  type="PRIVATE ROOM - 2BEDS"
-                  price={82}
-                  rating={4}
-                />
+                <Home width={width} type="TV Movie" id={10770} rating={4} />
+                <Home width={width} type="Thriller" id={53} rating={4} />
+                <Home width={width} type="War" id={10752} rating={4} />
+                <Home width={width} type="Western" id={37} rating={4} />
               </View>
             </View>
             {/* end : two section image  */}

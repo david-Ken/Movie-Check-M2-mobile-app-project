@@ -8,7 +8,8 @@ class Home extends Component {
       <View
         style={{
           width: this.props.width / 2 - 30,
-          height: this.props.width / 2 - 30,
+          // height: this.props.width / 2 - 30,
+          height: this.props.width + 150,
           borderWidth: 0.5,
           borderColor: "#dddddd"
         }}
@@ -21,7 +22,7 @@ class Home extends Component {
               height: null,
               resizeMode: "cover"
             }}
-            source={require("../../../assets/home.jpg")}
+            source={require("../../../assets/Posters/big1.jpg")}
           />
         </View>
         <View
@@ -35,10 +36,7 @@ class Home extends Component {
           <Text style={{ fontSize: 14, color: "#b63838" }}>
             {this.props.type}
           </Text>
-          <Text style={{ fontSize: 12, fontWeight: "bold" }}>
-            {this.props.name}
-          </Text>
-          <Text style={{ fontSize: 12 }}>{this.props.price}$</Text>
+          <Text style={{ fontSize: 12 }}>{this.props.id}</Text>
           <StarRating
             disabled={true}
             maxStars={5}
