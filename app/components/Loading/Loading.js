@@ -1,6 +1,6 @@
 // Loading.js
 import React, { Component } from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
+import { View, ActivityIndicator, StyleSheet, Image } from "react-native";
 import firebase from "react-native-firebase";
 
 export default class Loading extends Component {
@@ -25,14 +25,11 @@ export default class Loading extends Component {
 
   render() {
     return (
-      /*  <View style={styles.container}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
-      </View> */
       <View style={styles.splashContainer}>
-        <Text style={styles.splashTitle}>
-          {`Welcome to Movie Check :  ${this.state.timer}`}
-        </Text>
+        <Image
+          source={require("../../assets/Logo/logo.jpg")}
+          style={{ width: 350, height: 300 }}
+        />
         <ActivityIndicator size="large" />
       </View>
     );
@@ -45,14 +42,10 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   splashContainer: {
-    backgroundColor: "rgb(32,53,70)",
+    //  backgroundColor: "rgb(32,53,70)",
+    backgroundColor: "#102030",
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
-  },
-  splashTitle: {
-    fontWeight: "bold",
-    fontSize: 28,
-    color: "white"
   }
 });

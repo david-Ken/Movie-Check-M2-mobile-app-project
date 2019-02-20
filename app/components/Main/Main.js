@@ -11,7 +11,7 @@ import Trips from "../Screens/Trips";
 import Explore from "../Screens/Explore";
 import Profile from "../Screens/Profile";
 
-class Main extends Component {
+export default class Main extends Component {
   state = { currentUser: null };
 
   //Displaying the current user on the Main screen
@@ -37,7 +37,7 @@ class Main extends Component {
   }
 }
 
-export default createBottomTabNavigator({
+/* export default createBottomTabNavigator({
   Explore: {
     screen: Explore,
     navigationOptions: {
@@ -85,7 +85,7 @@ export default createBottomTabNavigator({
         <Icon name="ios-chatboxes-outline" color={tintColor} size={24} />
       )
     }
-  } /*,
+  } ,
   {
     tabBarOptions: {
       activeTintColor: 'red',
@@ -99,8 +99,8 @@ export default createBottomTabNavigator({
         elevation: 5
       }
     }
-  }*/
-});
+  }
+}); */
 
 const styles = StyleSheet.create({
   container: {

@@ -28,6 +28,7 @@ export default class SignUp extends Component {
         {this.state.errorMessage && (
           <Text style={{ color: "red" }}>{this.state.errorMessage}</Text>
         )}
+
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -59,13 +60,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#fff"
   },
   textInput: {
     height: 40,
     width: "90%",
     borderColor: "gray",
     borderWidth: 1,
-    marginTop: 8
+    marginTop: 8,
+    borderRadius: 20
   }
 });

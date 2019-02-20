@@ -38,6 +38,28 @@ class Explore extends Component {
               borderBottomColor: "#dddddd"
             }}
           >
+            {/* start : search bar  */}
+            <View
+              style={{
+                flexDirection: "row",
+                padding: 10,
+                backgroundColor: "white",
+                marginHorizontal: 20,
+                shadowOffset: { width: 0, heigth: 0 },
+                shadowOpacity: 0.2,
+                elevation: 1,
+                marginTop: Platform.OS == "android" ? 30 : null
+              }}
+            >
+              <Icon name="ios-search" size={20} />
+              <TextInput
+                underlineColorAndroid="transparent"
+                placeholder="Search For Movies"
+                placeholderTextColor="grey"
+                style={{ flex: 1, fontWeigth: "700", backgroundColor: "white" }}
+              />
+            </View>
+            {/* end : search bar  */}
             {/*start TAGS: fix ui problem here*/}
             <View
               style={{
