@@ -27,4 +27,5 @@ class Starter extends Component {
   }
 }
 
+//AppRegistry.registerComponent(appName, () => Log);
 AppRegistry.registerComponent(appName, () => App);

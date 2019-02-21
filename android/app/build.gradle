@@ -154,6 +154,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-vector-icons')
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -225,3 +226,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

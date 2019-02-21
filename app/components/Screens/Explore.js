@@ -251,7 +251,6 @@ class Explore extends Component {
                       flex: 1,
                       width: null,
                       height: null,
-                      resizeMode: "cover",
                       borderRadius: 5,
                       borderWidth: 1,
                       borderColor: "#dddddd",
