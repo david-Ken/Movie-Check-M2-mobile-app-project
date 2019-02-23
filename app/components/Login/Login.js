@@ -44,7 +44,8 @@ export default class Login extends Component {
                   flex: 1,
                   justifyContent: "center",
                   alignItems: "center",
-                  backgroundColor: "#102030"
+                  backgroundColor: "#102030",
+                  height: null
                 }}
               >
                 <Image
@@ -91,13 +92,75 @@ export default class Login extends Component {
                   <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
                 <Text
-                  style={{ marginBottom: 50, marginTop: 10, color: "grey" }}
+                  onPress={() => this.props.navigation.navigate("SignUp")}
+                  style={{
+                    marginTop: 10,
+                    color: "grey",
+                    fontSize: 17
+                  }}
                 >
-                  Don't have an account ? Sign Up
+                  Don't have an account ?{"  "}
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      textDecorationLine: "underline"
+                    }}
+                  >
+                    Sign Up
+                  </Text>
                 </Text>
+                {/* start : Divider with horizontal line */}
+                <View style={{ flexDirection: "row", width: 250, margin: 30 }}>
+                  <View
+                    style={{
+                      backgroundColor: "black",
+                      height: 1,
+                      flex: 1,
+                      alignSelf: "center"
+                    }}
+                  />
+                  <Text
+                    style={{
+                      alignSelf: "center",
+                      paddingHorizontal: 5,
+                      fontSize: 17
+                    }}
+                  >
+                    Or
+                  </Text>
+                  <View
+                    style={{
+                      backgroundColor: "black",
+                      height: 1,
+                      flex: 1,
+                      alignSelf: "center"
+                    }}
+                  />
+                </View>
+                {/* end : Divider with horizontal line */}
+                <TouchableOpacity
+                  style={styles.buttonContainer}
+                  onPress={() => this.props.navigation.navigate("SignUp")}
+                >
+                  <View style={styles.alignLogo}>
+                    <Image
+                      style={{
+                        width: 20,
+                        height: 20,
+                        margingTop: 15,
+                        marginRight: 17
+                      }}
+                      source={require("../../assets/Icons/google_G_logo.png")}
+                    />
+                    <Text style={styles.buttonText}>Sign in With Google</Text>
+                  </View>
+                </TouchableOpacity>
+
                 <SocialIcon
+                  style={styles.socialButtonContainer}
                   title="Sign In With Facebook"
                   button
+                  component
                   type="facebook"
                 />
 
@@ -108,7 +171,7 @@ export default class Login extends Component {
                   <Text style={styles.buttonText}>
                     Don't have an account? Sign Up
                   </Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity> 
                 <TouchableOpacity
                   style={styles.socialButtonContainer}
                   onPress={() => this.props.navigation.navigate("SignUp")}
@@ -120,7 +183,7 @@ export default class Login extends Component {
                   onPress={() => this.props.navigation.navigate("SignUp")}
                 >
                   <Text style={styles.buttonText}>Sign in with Facebook</Text>
-                </TouchableOpacity>
+                </TouchableOpacity>*/}
               </View>
             </View>
           </TouchableWithoutFeedback>
@@ -166,7 +229,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     paddingTop: 5,
-    color: "#fff"
+    color: "#fff",
+    fontFamily: "Sans Serif Black",
+    fontSize: 15
   },
   socialButtonContainer: {
     height: 40,
@@ -177,8 +242,15 @@ const styles = StyleSheet.create({
     //borderRadius: 20,
     // backgroundColor: "#f7c744",
     // backgroundColor: "#F47D08",
-    backgroundColor: "blue",
+    // backgroundColor: "blue",
     color: "#fff",
-    marginBottom: 10
+    marginBottom: 10,
+    borderRadius: 0
+  },
+  alignLogo: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });

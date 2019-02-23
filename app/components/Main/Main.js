@@ -36,8 +36,8 @@ export default class Main extends Component {
     );
   }
 }
-
-/* export default createBottomTabNavigator({
+/*
+export default createBottomTabNavigator({
   Explore: {
     screen: Explore,
     navigationOptions: {
@@ -85,7 +85,7 @@ export default class Main extends Component {
         <Icon name="ios-chatboxes-outline" color={tintColor} size={24} />
       )
     }
-  } ,
+  } /*,
   {
     tabBarOptions: {
       activeTintColor: 'red',
@@ -100,7 +100,7 @@ export default class Main extends Component {
       }
     }
   }
-}); */
+});*/
 
 const styles = StyleSheet.create({
   container: {

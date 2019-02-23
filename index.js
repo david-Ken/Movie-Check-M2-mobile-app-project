@@ -12,7 +12,7 @@ class Starter extends Component {
   constructor(props) {
     super(props);
     this.state = { currentScreen: "Splashscreen" };
-    console.log("Start doing somme task for about 3 seconds");
+    //  console.log("Start doing somme task for about 3 seconds");
 
     setTimeout(() => {
       this.setState({ currentScreen: "Log" });
@@ -26,6 +26,6 @@ class Starter extends Component {
     return mainScreen;
   }
 }
-
+export default Starter;
 //AppRegistry.registerComponent(appName, () => Log);
 AppRegistry.registerComponent(appName, () => App);

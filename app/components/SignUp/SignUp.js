@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     // marginTop: 8,
     margin: 10,
-    borderRadius: 20,
+    // borderRadius: 20,
     color: "white",
     textAlign: "center",
     fontSize: 18
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     marginTop: 10,
-    borderRadius: 20,
+    //borderRadius: 20,
     // backgroundColor: "#f7c744",
     // backgroundColor: "#F47D08",
     backgroundColor: "#CB960D",
