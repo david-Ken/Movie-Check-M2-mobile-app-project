@@ -11,7 +11,7 @@ import Trips from "../Screens/Trips";
 import Explore from "../Screens/Explore";
 import Profile from "../Screens/Profile";
 
-export default class Main extends Component {
+class Main extends Component {
   state = { currentUser: null };
 
   //Displaying the current user on the Main screen
@@ -22,8 +22,15 @@ export default class Main extends Component {
 
   //Logout user
   signOutUser() {
-    firebase.auth().signOut();
-    // this.props.navigation.navigate("Loading");
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        this.props.navigation.navigate("Loading");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   render() {
@@ -36,7 +43,7 @@ export default class Main extends Component {
     );
   }
 }
-/*
+
 export default createBottomTabNavigator({
   Explore: {
     screen: Explore,
@@ -99,8 +106,8 @@ export default createBottomTabNavigator({
         elevation: 5
       }
     }
-  }
-});*/
+  }*/
+});
 
 const styles = StyleSheet.create({
   container: {

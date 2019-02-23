@@ -18,6 +18,10 @@ import { SocialIcon } from "react-native-elements";
 
 export default class Login extends Component {
   state = { email: "", password: "", errorMessage: null };
+  constructor(props) {
+    super(props);
+    this.state = { logoWidth: 180, logoHeight: 130, addMarginBottom: null };
+  }
 
   //Logging an already existing user in
   handleLogin = () => {
@@ -27,6 +31,18 @@ export default class Login extends Component {
       .signInWithEmailAndPassword(email, password)
       .then(() => this.props.navigation.navigate("Main"))
       .catch(error => this.setState({ errorMessage: error.message }));
+  };
+
+  increaseLogo = () => {
+    this.setState({ logoWidth: 180 });
+    this.setState({ logoHeight: 130 });
+    this.setState({ addMarginBottom: null });
+  };
+
+  reduceLogo = () => {
+    this.setState({ logoWidth: 100 });
+    this.setState({ logoHeight: 50 });
+    this.setState({ addMarginBottom: 120 });
   };
 
   render() {
@@ -45,13 +61,13 @@ export default class Login extends Component {
                   justifyContent: "center",
                   alignItems: "center",
                   backgroundColor: "#102030",
-                  height: null
+                  marginBottom: this.state.addMarginBottom
                 }}
               >
                 <Image
                   style={{
-                    width: 180,
-                    height: 130,
+                    width: this.state.logoWidth,
+                    height: this.state.logoHeight,
                     borderColor: "#dddddd"
                   }}
                   source={require("../../assets/Logo/logo.jpg")}
@@ -70,6 +86,8 @@ export default class Login extends Component {
                   placeholder="Email"
                   onChangeText={email => this.setState({ email })}
                   value={this.state.email}
+                  onFocus={this.reduceLogo}
+                  onBlur={this.increaseLogo}
                 />
                 <TextInput
                   secureTextEntry
@@ -78,6 +96,8 @@ export default class Login extends Component {
                   placeholder="Password"
                   onChangeText={password => this.setState({ password })}
                   value={this.state.password}
+                  onFocus={this.reduceLogo}
+                  onBlur={this.increaseLogo}
                 />
                 {/* <Button title="Login" onPress={this.handleLogin} /> 
 
