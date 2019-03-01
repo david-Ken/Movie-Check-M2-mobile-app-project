@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import StarRating from "react-native-star-rating";
+//import { Rating, AirbnbRating } from "react-native-elements";
 
 class Home extends Component {
+  ratingCompleted(rating) {
+    console.log("Rating is: " + rating);
+    return rating;
+  }
+
   render() {
     return (
       <View
@@ -28,21 +33,24 @@ class Home extends Component {
         <View
           style={{
             flex: 1,
-            alignItems: "flex-start",
-            justifyContent: "space-evenly",
+            // alignItems: "flex-start",
+            //    justifyContent: "space-evenly",
             paddingLeft: 10
           }}
         >
-          <Text style={{ fontSize: 14, color: "#b63838" }}>
-            {this.props.type}
+          <Text style={{ fontSize: 14, color: "#b63838", textAlign: "center" }}>
+            {"\n"}
+            {this.props.type} {"\n\n"}
+            {this.props.categoryId}
           </Text>
-          <Text style={{ fontSize: 12 }}>{this.props.id}</Text>
-          <StarRating
-            disabled={true}
-            maxStars={5}
-            rating={this.props.rating}
-            StarSize={10}
-          />
+
+          {/*    <AirbnbRating
+            style={{ margin: 0, padding: 0, fontSize: 14 }}
+            count={5}
+            reviews={["Terrible", "Bad", "Meh", "OK", "Good"]}
+            defaultRating={11}
+            size={20}
+          /> */}
         </View>
       </View>
     );

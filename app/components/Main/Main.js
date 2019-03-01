@@ -5,7 +5,7 @@ import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import firebase from "react-native-firebase";
 
 import Icon from "react-native-vector-icons/Ionicons";
-import Saved from "../Screens/Saved";
+import Categories from "../Screens/Categories";
 import Inbox from "../Screens/Inbox";
 import Trips from "../Screens/Trips";
 import Explore from "../Screens/Explore";
@@ -54,10 +54,10 @@ export default createBottomTabNavigator({
       )
     }
   },
-  Saved: {
-    screen: Saved,
+  Categories: {
+    screen: Categories,
     navigationOptions: {
-      tabBarLabel: "SAVED",
+      tabBarLabel: "CATEGORIES",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="ios-heart-outline" color={tintColor} size={24} />
       )

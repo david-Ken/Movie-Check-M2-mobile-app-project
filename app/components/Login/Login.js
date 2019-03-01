@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     // marginTop: 8,
     margin: 10,
     // borderRadius: 20,
-    color: "white",
+    color: "grey",
     textAlign: "center",
     fontSize: 18
   },

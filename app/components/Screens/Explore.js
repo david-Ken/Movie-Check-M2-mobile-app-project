@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Category from "./Explore/Category";
-import Home from "./Explore/Home";
 import Tags from "./Explore/Tags";
 
 const { height, width } = Dimensions.get("window");
@@ -48,10 +47,11 @@ class Explore extends Component {
                 shadowOffset: { width: 0, heigth: 0 },
                 shadowOpacity: 0.2,
                 elevation: 1,
-                marginTop: Platform.OS == "android" ? 30 : null
+                marginTop: Platform.OS == "android" ? 30 : null,
+                marginBottom: Platform.OS == "android" ? 30 : null
               }}
             >
-              <Icon name="ios-search" size={20} />
+              <Icon name="ios-search" size={20} style={{ paddingTop: 13 }} />
               <TextInput
                 underlineColorAndroid="transparent"
                 placeholder="Search For Movies"
@@ -60,7 +60,7 @@ class Explore extends Component {
               />
             </View>
             {/* end : search bar  */}
-            {/*start TAGS: fix ui problem here*/}
+            {/*start TAGS: fix ui problem here*
             <View
               style={{
                 flexDirection: "row",
@@ -110,7 +110,7 @@ class Explore extends Component {
                 </Text>
               </View>
             </View>
-            {/*end TAG : FIX issu here*/}
+            {end TAG : FIX issu here*/}
           </View>
 
           <ScrollView scrollEventThrottle={16}>
@@ -263,53 +263,114 @@ class Explore extends Component {
               {/* end : big image section  */}
             </View>
 
-            {/* start : two section image  */}
-            <View style={{ marginTop: 40 }}>
-              <Text
-                style={{
-                  fontSize: 24,
-                  fontWeight: "700",
-                  paddingHorizontal: 20
-                }}
-              >
-                Find Movies by category
-              </Text>
+            {/* start : Most popluar movies  */}
+            <ScrollView scrollEventThrottle={16}>
               <View
                 style={{
-                  marginTop: 20,
-                  paddingHorizontal: 20,
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  justifyContent: "space-between"
+                  flex: 1,
+                  backgroundColor: "white",
+                  paddingTop: 20,
+                  marginTop: 20
                 }}
               >
-                <Home width={width} type="Action" id={28} rating={4} />
-                <Home width={width} type="Adventure" id={12} rating={4} />
-                <Home width={width} type="Animation" id={16} rating={4} />
-                <Home width={width} type="Comedy" id={35} rating={4} />
-                <Home width={width} type="Crime" id={80} rating={4} />
-                <Home width={width} type="Documentary" id={99} rating={4} />
-                <Home width={width} type="Drama" id={18} rating={4} />
-                <Home width={width} type="Family" id={10751} rating={4} />
-                <Home width={width} type="Fantasy" id={14} rating={4} />
-                <Home width={width} type="History" id={36} rating={4} />
-                <Home width={width} type="Horror" id={27} rating={4} />
-                <Home width={width} type="Music" id={10402} rating={4} />
-                <Home width={width} type="Mystery" id={9648} rating={4} />
-                <Home width={width} type="Romance" id={10749} rating={4} />
-                <Home
-                  width={width}
-                  type="Science Fiction"
-                  id={878}
-                  rating={4}
-                />
-                <Home width={width} type="TV Movie" id={10770} rating={4} />
-                <Home width={width} type="Thriller" id={53} rating={4} />
-                <Home width={width} type="War" id={10752} rating={4} />
-                <Home width={width} type="Western" id={37} rating={4} />
+                <Text
+                  style={{
+                    fontSize: 24,
+                    fontWeight: "700",
+                    paddingHorizontal: 20
+                  }}
+                >
+                  Most popular movies
+                </Text>
+                <View style={{ height: 220, marginTop: 20 }}>
+                  <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                  >
+                    <Category
+                      imageUri={require("../../assets/Posters/19.jpg")}
+                      name="Comedy"
+                    />
+
+                    <Category
+                      imageUri={require("../../assets/Posters/18.jpg")}
+                      name="Sci-fi"
+                    />
+                    <Category
+                      imageUri={require("../../assets/Posters/15.jpg")}
+                      name="Horror"
+                    />
+                    <Category
+                      imageUri={require("../../assets/Posters/3.jpg")}
+                      name="Romance"
+                    />
+                    <Category
+                      imageUri={require("../../assets/Posters/4.jpg")}
+                      name="Action"
+                    />
+                    <Category
+                      imageUri={require("../../assets/Posters/14.jpg")}
+                      name="Fantasy"
+                    />
+                  </ScrollView>
+                </View>
               </View>
-            </View>
-            {/* end : two section image  */}
+            </ScrollView>
+            {/* end : Most popluar movies  */}
+
+            {/* start : the best movies from 2018 */}
+            <ScrollView scrollEventThrottle={16}>
+              <View
+                style={{
+                  flex: 1,
+                  backgroundColor: "white",
+                  paddingTop: 20,
+                  marginTop: 20
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 24,
+                    fontWeight: "700",
+                    paddingHorizontal: 20
+                  }}
+                >
+                  The best movies from 2018
+                </Text>
+                <View style={{ height: 220, marginTop: 20 }}>
+                  <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={true}
+                  >
+                    <Category
+                      imageUri={require("../../assets/Posters/22.jpg")}
+                      name="Action"
+                    />
+                    <Category
+                      imageUri={require("../../assets/Posters/21.jpg")}
+                      name="Fantasy"
+                    />
+                    <Category
+                      imageUri={require("../../assets/Posters/20.jpg")}
+                      name="Sci-fi"
+                    />
+                    <Category
+                      imageUri={require("../../assets/Posters/0.jpg")}
+                      name="Comedy"
+                    />
+                    <Category
+                      imageUri={require("../../assets/Posters/2.jpg")}
+                      name="Horror"
+                    />
+                    <Category
+                      imageUri={require("../../assets/Posters/3.jpg")}
+                      name="Romance"
+                    />
+                  </ScrollView>
+                </View>
+              </View>
+            </ScrollView>
+            {/* end : the best movies from 2018 */}
           </ScrollView>
         </View>
       </SafeAreaView>
