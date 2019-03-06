@@ -59,7 +59,7 @@ export default createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "CATEGORIES",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-heart-outline" color={tintColor} size={24} />
+        <Icon name="local_movies" color={tintColor} size={24} />
       )
     }
   },

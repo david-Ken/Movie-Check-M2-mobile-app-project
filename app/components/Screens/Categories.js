@@ -4,20 +4,25 @@ import {
   Text,
   TextInput,
   View,
-  SafeAreaView,
+  FlatList,
   Platform,
-  StatusBar,
   ScrollView,
-  Image,
-  Dimensions
+  TouchableOpacity,
+  TouchableHighlight
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import Category from "./Explore/Category";
-import Home from "./Explore/Home";
-import Tags from "./Explore/Tags";
+import { movies } from "./call";
 
-const { height, width } = Dimensions.get("window");
+import Item from "./Explore/Item";
+
 class Categories extends Component {
+  constructor() {
+    super();
+    this.state = {
+      dataSource: movies
+    };
+  }
+
   render() {
     return (
       <View style={StyleSheet.container}>
@@ -55,9 +60,9 @@ class Categories extends Component {
             />
           </View>
           {/* end : category search bar  */}
-          {/* start : category list  */}
-          {/* start : two section image  */}
-          <ScrollView scrollEventThrottle={16}>
+
+          {/* start : two section category image  */}
+          <ScrollView horizontal={false} scrollEventThrottle={16}>
             <View style={{ marginTop: 40 }}>
               <Text
                 style={{
@@ -77,31 +82,73 @@ class Categories extends Component {
                   justifyContent: "space-between"
                 }}
               >
-                <Home width={width} type="Action" categoryId={28} />
-                <Home width={width} type="Adventure" categoryId={12} />
-                <Home width={width} type="Animation" categoryId={16} />
-                <Home width={width} type="Comedy" categoryId={35} />
-                <Home width={width} type="Crime" categoryId={80} />
-                <Home width={width} type="Documentary" categoryId={99} />
-                <Home width={width} type="Drama" categoryId={18} />
-                <Home width={width} type="Family" categoryId={10751} />
-                <Home width={width} type="Fantasy" categoryId={14} />
-                <Home width={width} type="History" categoryId={36} />
-                <Home width={width} type="Horror" categoryId={27} />
-                <Home width={width} type="Music" categoryId={10402} />
-                <Home width={width} type="Mystery" categoryId={9648} />
-                <Home width={width} type="Romance" categoryId={10749} />
-                <Home width={width} type="Science Fiction" categoryId={878} />
-                <Home width={width} type="TV Movie" categoryId={10770} />
-                <Home width={width} type="Thriller" categoryId={53} />
-                <Home width={width} type="War" categoryId={10752} />
-                <Home width={width} type="Western" categoryId={37} />
+                <FlatList
+                  horizontal={false}
+                  numColumns={2}
+                  data={this.state.dataSource}
+                  renderItem={({ item, separators }) => (
+                    <TouchableOpacity
+                      onPress={() => this._onPress(item)}
+                      //   onShowUnderlay={separators.highlight}
+                      //   onHideUnderlay={separators.unhighlight}
+                    >
+                      <Item imageUri={{ uri: item.poster }} name={item.genre} />
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* 
+                <TouchableOpacity>
+                  <Item
+                    imageUri={require("../../assets/Posters/14.jpg")}
+                    name="Fantasy"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Item
+                    imageUri={require("../../assets/Posters/big1.jpg")}
+                    name="Action"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Item
+                    imageUri={require("../../assets/Posters/18.jpg")}
+                    name="Comedie"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Item
+                    imageUri={require("../../assets/Posters/10.jpg")}
+                    name="Science Fiction"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Item
+                    imageUri={require("../../assets/Posters/14.jpg")}
+                    name="Fantasy"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Item
+                    imageUri={require("../../assets/Posters/big1.jpg")}
+                    name="Action"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Item
+                    imageUri={require("../../assets/Posters/18.jpg")}
+                    name="Comedie"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Item
+                    imageUri={require("../../assets/Posters/10.jpg")}
+                    name="Science Fiction"
+                  />
+                </TouchableOpacity> */}
               </View>
             </View>
           </ScrollView>
-          {/* end : two section image  */}
-
-          {/* end : category list */}
+          {/* end : two category section image  */}
         </View>
       </View>
     );
