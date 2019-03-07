@@ -7,11 +7,12 @@ import {
   FlatList,
   Platform,
   ScrollView,
-  TouchableOpacity,
-  TouchableHighlight
+  TouchableOpacity
 } from "react-native";
+
 import Icon from "react-native-vector-icons/Ionicons";
-import { movies } from "./call";
+import { movies } from "./data";
+import { Profile } from "./Profile";
 
 import Item from "./Explore/Item";
 
@@ -24,6 +25,7 @@ class Categories extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={StyleSheet.container}>
         <View
@@ -88,9 +90,10 @@ class Categories extends Component {
                   data={this.state.dataSource}
                   renderItem={({ item, separators }) => (
                     <TouchableOpacity
-                      onPress={() => this._onPress(item)}
-                      //   onShowUnderlay={separators.highlight}
-                      //   onHideUnderlay={separators.unhighlight}
+                      //   onPress={() => this._onPress(item)}
+                      onPress={() => navigate("Profile", { name: "Brent" })}
+                      onShowUnderlay={separators.highlight}
+                      onHideUnderlay={separators.unhighlight}
                     >
                       <Item imageUri={{ uri: item.poster }} name={item.genre} />
                     </TouchableOpacity>

@@ -14,7 +14,7 @@ import {
   ActivityIndicator
 } from "react-native";
 import { Avatar, Badge, Icon, withBadge } from "react-native-elements";
-import { movies } from "./call";
+import { movies } from "./data";
 
 const { height, width } = Dimensions.get("window");
 

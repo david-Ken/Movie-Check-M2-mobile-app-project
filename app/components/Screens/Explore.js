@@ -8,6 +8,7 @@ import {
   Platform,
   StatusBar,
   ScrollView,
+  TouchableOpacity,
   Image,
   Dimensions
 } from "react-native";
@@ -209,31 +210,42 @@ class Explore extends Component {
                     name="Western"
                   /> */}
 
-                  <Category
-                    imageUri={require("../../assets/Posters/0.jpg")}
-                    name="Comedy"
-                  />
-
-                  <Category
-                    imageUri={require("../../assets/Posters/1.jpg")}
-                    name="Sci-fi"
-                  />
-                  <Category
-                    imageUri={require("../../assets/Posters/2.jpg")}
-                    name="Horror"
-                  />
-                  <Category
-                    imageUri={require("../../assets/Posters/3.jpg")}
-                    name="Romance"
-                  />
-                  <Category
-                    imageUri={require("../../assets/Posters/4.jpg")}
-                    name="Action"
-                  />
-                  <Category
-                    imageUri={require("../../assets/Posters/14.jpg")}
-                    name="Fantasy"
-                  />
+                  <TouchableOpacity>
+                    <Category
+                      imageUri={require("../../assets/Posters/0.jpg")}
+                      name="Comedy"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Category
+                      imageUri={require("../../assets/Posters/1.jpg")}
+                      name="Sci-fi"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Category
+                      imageUri={require("../../assets/Posters/2.jpg")}
+                      name="Horror"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Category
+                      imageUri={require("../../assets/Posters/3.jpg")}
+                      name="Romance"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Category
+                      imageUri={require("../../assets/Posters/4.jpg")}
+                      name="Action"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Category
+                      imageUri={require("../../assets/Posters/14.jpg")}
+                      name="Fantasy"
+                    />
+                  </TouchableOpacity>
                 </ScrollView>
               </View>
               {/* end : CATEGORY  */}
@@ -287,31 +299,42 @@ class Explore extends Component {
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                   >
-                    <Category
-                      imageUri={require("../../assets/Posters/19.jpg")}
-                      name="Comedy"
-                    />
-
-                    <Category
-                      imageUri={require("../../assets/Posters/18.jpg")}
-                      name="Sci-fi"
-                    />
-                    <Category
-                      imageUri={require("../../assets/Posters/15.jpg")}
-                      name="Horror"
-                    />
-                    <Category
-                      imageUri={require("../../assets/Posters/3.jpg")}
-                      name="Romance"
-                    />
-                    <Category
-                      imageUri={require("../../assets/Posters/4.jpg")}
-                      name="Action"
-                    />
-                    <Category
-                      imageUri={require("../../assets/Posters/14.jpg")}
-                      name="Fantasy"
-                    />
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/19.jpg")}
+                        name="Comedy"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/18.jpg")}
+                        name="Sci-fi"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/15.jpg")}
+                        name="Horror"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/3.jpg")}
+                        name="Romance"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/4.jpg")}
+                        name="Action"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/14.jpg")}
+                        name="Fantasy"
+                      />
+                    </TouchableOpacity>
                   </ScrollView>
                 </View>
               </View>
@@ -342,30 +365,42 @@ class Explore extends Component {
                     horizontal={true}
                     showsHorizontalScrollIndicator={true}
                   >
-                    <Category
-                      imageUri={require("../../assets/Posters/22.jpg")}
-                      name="Action"
-                    />
-                    <Category
-                      imageUri={require("../../assets/Posters/21.jpg")}
-                      name="Fantasy"
-                    />
-                    <Category
-                      imageUri={require("../../assets/Posters/20.jpg")}
-                      name="Sci-fi"
-                    />
-                    <Category
-                      imageUri={require("../../assets/Posters/0.jpg")}
-                      name="Comedy"
-                    />
-                    <Category
-                      imageUri={require("../../assets/Posters/2.jpg")}
-                      name="Horror"
-                    />
-                    <Category
-                      imageUri={require("../../assets/Posters/3.jpg")}
-                      name="Romance"
-                    />
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/22.jpg")}
+                        name="Action"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/21.jpg")}
+                        name="Fantasy"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/20.jpg")}
+                        name="Sci-fi"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/0.jpg")}
+                        name="Comedy"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/2.jpg")}
+                        name="Horror"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Category
+                        imageUri={require("../../assets/Posters/3.jpg")}
+                        name="Romance"
+                      />
+                    </TouchableOpacity>
                   </ScrollView>
                 </View>
               </View>

@@ -1,7 +1,7 @@
 // Main.js
 import React, { Component } from "react";
 import { StyleSheet, Platform, Image, Text, View, Button } from "react-native";
-import { createBottomTabNavigator, createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation";
 import firebase from "react-native-firebase";
 
 import Icon from "react-native-vector-icons/Ionicons";
