@@ -7,7 +7,8 @@ import {
   View,
   Dimensions,
   BackHandler,
-  ImageBackground
+  ImageBackground,
+  TouchableOpacity
 } from "react-native";
 import { Icon } from "react-native-elements";
 import MaterialTabs from "react-native-material-tabs";
@@ -37,17 +38,29 @@ class Trips extends Component {
     const { goBack } = this.props.navigation;
     return (
       <View style={StyleSheet.container}>
-        {/*   <View style={styles.backdropImageView}>
-          <Image
-            style={styles.backdropImage}
-            source={require("../../assets//Posters/backdrop.jpg")}
-          />
-         
-        </View> */}
         <ImageBackground
           source={require("../../assets//Posters/backdrop.jpg")}
           style={styles.backdropImageView}
         >
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              padding: 10
+            }}
+          >
+            <TouchableOpacity>
+              <Icon
+                name="arrow-back"
+                onPress={() => goBack()}
+                size={28}
+                color="white"
+              />
+            </TouchableOpacity>
+          </View>
+
           <View
             style={{
               flex: 1,
@@ -59,7 +72,7 @@ class Trips extends Component {
               items={["One", "Two", "Three"]}
               selectedIndex={this.state.selectedTab}
               onChange={index => this.setState({ selectedTab: index })}
-              barColor="transparent"
+              barColor="rgba(255,255,255,.1)"
               indicatorColor="red"
               activeTextStyle={styles.tabActiveText}
             />
@@ -103,7 +116,7 @@ class Trips extends Component {
                 }}
               >
                 <View style={styles.movie_info}>
-                  <Text>Informations</Text>
+                  <Text style={{ fontSize: 15 }}>Informations</Text>
                 </View>
                 <View style={styles.hr} />
                 <View style={styles.movie_info}>
@@ -128,13 +141,14 @@ class Trips extends Component {
                     https://web.whatsapp.com/
                   </Text>
                 </View>
-
-                <Button
-                  onPress={() => goBack()}
-                  title="Learn More"
-                  color="red"
-                  accessibilityLabel="Learn more about this purple button"
-                />
+                <View style={{ width: "80%" }}>
+                  <Button
+                    onPress={() => goBack()}
+                    title="Purchase"
+                    color="red"
+                    accessibilityLabel="Learn more about this purple button"
+                  />
+                </View>
               </View>
             </View>
             {/*   start : movie summary  */}
@@ -142,13 +156,13 @@ class Trips extends Component {
               style={{
                 flex: 1,
                 flexDirection: "column",
-                marginVertical: 10,
                 padding: 20
               }}
             >
-              <Text style={{ fontWeight: "bold", marginVertical: 10 }}>
+              <Text style={{ fontWeight: "bold", marginTop: 10, fontSize: 20 }}>
                 Overview
               </Text>
+              <View style={styles.hr} />
               <Text style={{ textAlign: "justify" }}>
                 A common misconception is that RNFirebase provides social and
                 login out of the box. This is somewhat true, it leaves the

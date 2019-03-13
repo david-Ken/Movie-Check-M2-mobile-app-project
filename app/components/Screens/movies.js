@@ -21,7 +21,7 @@ export default class Movies extends Component {
     );
   }
 }
-
+ 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20 // start below status bar

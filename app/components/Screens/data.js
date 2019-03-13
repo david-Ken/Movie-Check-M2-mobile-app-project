@@ -1,58 +1,78 @@
-/*function MultipleFetch(numberOfPage, year) {
-  let temp = [];
+function MultipleFetch(numberOfPage, year) {
+  var temp = [];
 
-  for (var i = 1; i < numberOfPage; i++) {
-    var apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&year=${year}`;
+  //for (var i = 1; i < numberOfPage; i++) {
+  // var apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&year=${year}`;
+  var apiUrl =
+    "https://api.themoviedb.org/3/movie/450001?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US";
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(responseJson => {
+      //  console.log(responseJson.results);
 
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(responseJson => {
-        temp.push(responseJson.results);
-        // console.log(responseJson);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
-  console.table(temp);
-}
-MultipleFetch(10, 2018);
-
-
-
-
-
-async function multipleFetch(numberOfPage, year) {
-  let temp = [];
-
-  for (var i = 1; i < numberOfPage; i++) {
-    var apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&year=${year}`;
-
-    await fetch(apiUrl)
-      .then(response => response.json())
-      .then(responseJson => {
-        temp.push(responseJson.results);
-       
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
+      //temp.push(responseJson);
+      temp = responseJson;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  //}
 
   return temp;
 }
 
+async function getDatas(nbPages, year) {
+  const url = `https://api.themoviedb.org/3/discover/movie?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${nbPages}&year=${year}`;
+  const response = await fetch(url);
+  try {
+    const json = response.json();
+    return json;
+  } catch (e) {
+    console.log(e);
+  }
+}
 
+let myData = null;
 
-var formated = multipleFetch(10, 2018).reduce(
-  (acc, val) => acc.concat(val),
-  []
+for (let i = 1; i <= 20; i++) {
+  getDatas(i, 2018).then(data => {
+    //console.log(data);
+    myData.push(data);
+  });
+}
+
+function initializeEmptyArray(nb) {
+  let array = [];
+  for (let i = 0; i < nb; i++) {
+    array.push([]);
+  }
+  return array;
+}
+module.exports = {
+  getDatas,
+  initializeEmptyArray
+};
+
+/* function flatten(arr) {
+  return Array.prototype.concat(...arr);
+}
+function format(datatab) {
+  var formatted = [];
+  for (var i = 0; i < datatab.length; i++) {
+    formatted[i] = datatab[i];
+  }
+  return formatted;
+} */
+
+var finale = MultipleFetch(10, 2018);
+
+console.log(
+  "********************************Finale****************************************"
 );
-export const movies = formated;
+//console.log(finale);
+//console.log("test:" + finale[0]);
 
-*/
+//export default finale;
 
 export const movies = [
   {
@@ -147,8 +167,7 @@ export const movies = [
   }
 ];
 
-/*
-export const movies = [
+export const final = [
   {
     vote_count: 1745,
     id: 490132,
@@ -3550,6 +3569,3 @@ export const movies = [
     release_date: "2017-09-13"
   }
 ];
-
-
-*/

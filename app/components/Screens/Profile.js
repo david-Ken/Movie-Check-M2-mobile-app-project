@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import { Avatar, Badge, Icon, withBadge } from "react-native-elements";
 import { movies } from "./data";
+import { getDatas, initializeEmptyArray } from "./data";
 
 const { height, width } = Dimensions.get("window");
 
@@ -28,12 +29,25 @@ class Profile extends Component {
     super(props);
     this.state = {
       isLoading: false,
+      apidata: initializeEmptyArray(20),
       dataSource: movies /*,
       dataSource: multipleFetch(10, 2018).then(() => {
         this.setState({ isLoading: false });
       })*/
     };
   }
+  componentDidMount = () => {
+    let myData = null;
+    for (let i = 1; i <= 20; i++) {
+      getDatas(i, 2018).then(data => {
+        this.state.apidata[i - 1] = data;
+        this.setState({
+          apidata: this.state.apidata
+        });
+      });
+    }
+  };
+
   /*
     async function multipleFetch(numberOfPage, year) {
       let temp = [];
@@ -76,6 +90,7 @@ class Profile extends Component {
   }
 */
   render() {
+    console.log(this.state.apidata);
     if (this.state.isLoading) {
       return (
         <View
@@ -115,9 +130,21 @@ class Profile extends Component {
               <Text>{movie.title}</Text>
             ))} */}
 
-            {this.state.dataSource.map((movie, index) => (
+            {/*       {this.state.dataSource.map((movie, index) => (
               <MoviePoster movie={movie} onOpen={this.openMovie} key={index} />
-            ))}
+            ))} */}
+            <FlatList
+              horizontal={false}
+              numColumns={2}
+              data={this.state.apidata}
+              keyExtractor={item => item.id}
+              renderItem={({ item, separators }) => (
+                <Text>
+                  {item.title}
+                  {"\n"}
+                </Text>
+              )}
+            />
           </ScrollView>
         </View>
       );
