@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
-  TextInput,
   View,
-  SafeAreaView,
-  Platform,
-  StatusBar,
   ScrollView,
   FlatList,
   Image,
@@ -28,67 +24,27 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
+      isLoading: true,
       apidata: initializeEmptyArray(20),
-      dataSource: movies /*,
-      dataSource: multipleFetch(10, 2018).then(() => {
-        this.setState({ isLoading: false });
-      })*/
+      dataSource: movies
     };
   }
   componentDidMount = () => {
-    let myData = null;
+    var a = 0;
     for (let i = 1; i <= 20; i++) {
       getDatas(i, 2018).then(data => {
-        this.state.apidata[i - 1] = data;
-        this.setState({
-          apidata: this.state.apidata
-        });
+        for (let j = 0; j < 20; j++) {
+          this.state.apidata[a] = data.results[j];
+          a++;
+        }
       });
     }
+    this.setState({
+      apidata: this.state.apidata,
+      isLoading: false
+    });
   };
 
-  /*
-    async function multipleFetch(numberOfPage, year) {
-      let temp = [];
-
-      for (var i = 1; i < numberOfPage; i++) {
-        var apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&year=${year}`;
-
-        await fetch(apiUrl)
-          .then(response => response.json())
-          .then(responseJson => {
-            temp.push(responseJson.results);
-            // console.log(responseJson);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-      this.setState({ dataSource: temp.flat() });
-
-      return temp;
-    }
-  }
-
-
-  componentDidMount() {
-       return fetch(apiUrl)
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState(
-          {
-            isLoading: false,
-            dataSource: responseJson.results
-          },
-          function() {}
-        );
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-*/
   render() {
     console.log(this.state.apidata);
     if (this.state.isLoading) {
@@ -137,7 +93,7 @@ class Profile extends Component {
               horizontal={false}
               numColumns={2}
               data={this.state.apidata}
-              keyExtractor={item => item.id}
+              //   keyExtractor={item => item.id}
               renderItem={({ item, separators }) => (
                 <Text>
                   {item.title}
