@@ -11,18 +11,16 @@ import {
   StatusBar,
   ScrollView,
   TouchableOpacity,
-  Image,
   Dimensions
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Category from "./Explore/Category";
-import VideoPlayer from "react-native-video-controls";
-//import VideoPlayerView from "./VideoPlayerView";
+import VideoPlayerView from "./VideoPlayerView";
 import { movies, getMoviesByYear, getData, initializeEmptyArray } from "./data";
-//import { defaultStyles } from "./styles";
+
 // "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
 // "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
-const { height, width } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 const baseImageURL = "https://image.tmdb.org/t/p/w500/";
 const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&page=1&append_to_response=videos`;
 
@@ -220,21 +218,15 @@ class Explore extends Component {
                       }}
                       source={require("../../assets/Posters/big.jpg")}
                     /> */}
-                    <VideoPlayer
-                      style={{
-                        flex: 1,
-                        width: null,
-                        height: null,
-                        borderRadius: 5,
-                        borderWidth: 1,
-                        borderColor: "#dddddd",
-                        resizeMode: "cover"
-                      }}
-                      source={{
-                        //  uri: "https://vjs.zencdn.net/v/oceans.mp4"
-                        uri: "https://www.youtube.com/watch?v=SUXWAEX2jlg"
-                      }}
-                      navigator={this.props.navigator}
+
+                    <VideoPlayerView
+                      /*  videoIds={[
+                        "HcXNPI-IPPM",
+                        "XXlZfc1TrD0",
+                        "czcjU1w-c6k",
+                        "uMK0prafzw0"
+                      ]} */
+                      videoId="KVZ-P-ZI6W4"
                     />
                   </View>
                 </View>

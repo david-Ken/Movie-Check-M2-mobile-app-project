@@ -22,6 +22,7 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "install": "^0.12.2",
     "react": "16.6.3",
     "react-native": "0.58.0-rc.2",
     "react-native-elements": "1.0.0",
@@ -31,6 +32,7 @@
     "react-native-vector-icons": "6.3.0",
     "react-native-video": "^4.4.0",
     "react-native-video-controls": "^2.2.3",
+    "react-native-youtube": "^1.1.0",
     "react-navigation": "3.2.3"
   }
 }

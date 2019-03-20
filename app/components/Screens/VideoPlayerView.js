@@ -1,17 +1,22 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import VideoPlayer from "react-native-video-controls";
+import { StyleSheet } from "react-native";
+import YouTube from "react-native-youtube";
 
 class VideoPlayerView extends Component {
   render() {
     return (
-      <view style={styles.container}>
-        <VideoPlayer
-          source={{ uri: "https://vjs.zencdn.net/v/oceans.mp4" }}
-          //   title={this.props.title}
-          onBlack={() => null}
-        />
-      </view>
+      <YouTube
+        apiKey="AIzaSyCYn-KfJL-B5ri2uQhimzd1Bj9U78GYqlQ"
+        videoId={this.props.videoId} // The YouTube video ID
+        //    play={true} // control playback of video with true/false
+        fullscreen={false} // control whether the video should play in fullscreen or inline
+        //      loop={true} // control whether the video should loop when ended
+        onReady={e => this.setState({ isReady: true })}
+        onChangeState={e => this.setState({ status: e.state })}
+        onChangeQuality={e => this.setState({ quality: e.quality })}
+        onError={e => this.setState({ error: e.error })}
+        style={{ alignSelf: "stretch", height: 300 }}
+      />
     );
   }
 }
