@@ -1,4 +1,4 @@
-async function getDatas(numberOfbPages, year) {
+async function getMoviesByYear(numberOfbPages, year) {
   const url = `https://api.themoviedb.org/3/discover/movie?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${numberOfbPages}&year=${year}`;
   const response = await fetch(url);
   try {
@@ -9,12 +9,22 @@ async function getDatas(numberOfbPages, year) {
   }
 }
 
-let myData = null;
+async function getData(url) {
+  const response = await fetch(url);
+  try {
+    const json = response.json();
+    return json;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+let movieByYearDataTable = null;
 
 for (let i = 1; i <= 20; i++) {
-  getDatas(i, 2018).then(data => {
+  getMoviesByYear(i, 2018).then(data => {
     //console.log(data);
-    myData.push(data);
+    movieByYearDataTable.push(data);
   });
 }
 
@@ -29,7 +39,8 @@ function initializeEmptyArray(nb) {
 }
 //export
 module.exports = {
-  getDatas,
+  getMoviesByYear,
+  getData,
   initializeEmptyArray,
   movies
 };

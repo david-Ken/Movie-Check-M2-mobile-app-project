@@ -13,8 +13,7 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import { movies } from "./data";
 import { Profile } from "./Profile";
-
-import Item from "./Explore/Item";
+import { Item } from "./Explore/Item";
 
 class Categories extends Component {
   constructor() {

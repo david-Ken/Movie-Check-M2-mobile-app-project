@@ -69,7 +69,7 @@ class Trips extends Component {
             }}
           >
             <MaterialTabs
-              items={["One", "Two", "Three"]}
+              items={["Info", "Actors", "Trailers"]}
               selectedIndex={this.state.selectedTab}
               onChange={index => this.setState({ selectedTab: index })}
               barColor="rgba(255,255,255,.1)"

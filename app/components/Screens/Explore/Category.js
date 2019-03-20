@@ -8,7 +8,7 @@ class Category extends Component {
         <View style={{ flex: 2 }}>
           <Image source={this.props.imageUri} style={styles.category} />
         </View>
-        <View style={{ flex: 1, paddingLeft: 40, paddingTop: 10 }}>
+        <View style={{ flex: 1, paddingLeft: 30, paddingTop: 10 }}>
           <Text>{this.props.name}</Text>
         </View>
       </View>

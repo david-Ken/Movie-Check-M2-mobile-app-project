@@ -11,12 +11,12 @@ import {
 } from "react-native";
 import { Avatar, Badge, Icon, withBadge } from "react-native-elements";
 import { movies } from "./data";
-import { getDatas, initializeEmptyArray } from "./data";
+import { getMoviesByYear, initializeEmptyArray } from "./data";
 
 const { height, width } = Dimensions.get("window");
 
 import MoviePoster from "./MoviePoster";
-
+//https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US
 const apiUrl =
   "https://api.themoviedb.org/3/discover/movie?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&year=2018";
 
@@ -32,7 +32,7 @@ class Profile extends Component {
   componentDidMount = () => {
     var a = 0;
     for (let i = 1; i <= 20; i++) {
-      getDatas(i, 2018).then(data => {
+      getMoviesByYear(i, 2018).then(data => {
         for (let j = 0; j < 20; j++) {
           this.state.apidata[a] = data.results[j];
           a++;
