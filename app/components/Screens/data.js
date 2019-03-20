@@ -8,6 +8,7 @@ async function getMoviesByYear(numberOfbPages, year) {
     console.log(e);
   }
 }
+//https://www.youtube.com/watch?v=SUXWAEX2jlg
 
 async function getData(url) {
   const response = await fetch(url);

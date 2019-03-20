@@ -16,12 +16,15 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Category from "./Explore/Category";
+import VideoPlayer from "react-native-video-controls";
+//import VideoPlayerView from "./VideoPlayerView";
 import { movies, getMoviesByYear, getData, initializeEmptyArray } from "./data";
 //import { defaultStyles } from "./styles";
-
+// "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
+// "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
 const { height, width } = Dimensions.get("window");
 const baseImageURL = "https://image.tmdb.org/t/p/w500/";
-const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&page=1`;
+const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&page=1&append_to_response=videos`;
 
 class Explore extends Component {
   constructor(props) {
@@ -43,7 +46,7 @@ class Explore extends Component {
       this.endHeaderHeight = 70 + StatusBar.currentHeigth;
     }
 
-    //retrieve data
+    //retrieve movies form 2018 (last year)
     var a = 0;
     for (let i = 1; i <= 10; i++) {
       getMoviesByYear(i, 2018).then(data => {
@@ -59,6 +62,7 @@ class Explore extends Component {
       loader1: false
     });
 
+    // retrieve "now playing movies"
     getData(nowPlayingMovieUrl).then(data => {
       //console.log(data);
       this.setState({
@@ -67,6 +71,7 @@ class Explore extends Component {
       });
     });
 
+    //remove loader if async data are ready
     if (!(this.state.loader1 && this.state.loader2)) {
       this.setState({
         isLoading: false
@@ -203,7 +208,7 @@ class Explore extends Component {
                       marginTop: 20
                     }}
                   >
-                    <Image
+                    {/*  <Image
                       style={{
                         flex: 1,
                         width: null,
@@ -214,6 +219,22 @@ class Explore extends Component {
                         resizeMode: "cover"
                       }}
                       source={require("../../assets/Posters/big.jpg")}
+                    /> */}
+                    <VideoPlayer
+                      style={{
+                        flex: 1,
+                        width: null,
+                        height: null,
+                        borderRadius: 5,
+                        borderWidth: 1,
+                        borderColor: "#dddddd",
+                        resizeMode: "cover"
+                      }}
+                      source={{
+                        //  uri: "https://vjs.zencdn.net/v/oceans.mp4"
+                        uri: "https://www.youtube.com/watch?v=SUXWAEX2jlg"
+                      }}
+                      navigator={this.props.navigator}
                     />
                   </View>
                 </View>
@@ -247,9 +268,7 @@ class Explore extends Component {
                       <TouchableOpacity>
                         <Category
                           imageUri={{
-                            uri:
-                              // "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
-                              baseImageURL + item.poster_path
+                            uri: baseImageURL + item.poster_path
                           }}
                           name={item.title}
                         />
@@ -288,16 +307,10 @@ class Explore extends Component {
                 data={this.state.apidata}
                 //   keyExtractor={item => item.id}
                 renderItem={({ item, separators }) => (
-                  /*   <Text>
-                    {item.title}
-                    {"\n"}
-                  </Text> */
                   <TouchableOpacity>
                     <Category
                       imageUri={{
-                        uri:
-                          // "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
-                          baseImageURL + item.poster_path
+                        uri: baseImageURL + item.poster_path
                       }}
                       name={item.title}
                     />

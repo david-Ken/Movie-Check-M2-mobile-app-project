@@ -33,4 +33,7 @@ target 'Movieswatch' do
 
   pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
+
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
 end

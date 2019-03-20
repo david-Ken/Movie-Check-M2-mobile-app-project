@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     height: 300,
     width: 130,
     marginLeft: 20,
-    borderWidth: 0.5,
+    // borderWidth: 0.5,
     borderColor: "#dddddd"
   },
   category: {
