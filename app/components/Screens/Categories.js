@@ -19,9 +19,15 @@ class Categories extends Component {
   constructor() {
     super();
     this.state = {
-      dataSource: movies
+      dataSource: null
     };
   }
+
+  componentDidMount = () => {
+    this.setState({
+      dataSource: movies
+    });
+  };
 
   render() {
     const { navigate } = this.props.navigation;

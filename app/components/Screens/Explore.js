@@ -10,6 +10,7 @@ import {
   Platform,
   StatusBar,
   ScrollView,
+  Image,
   TouchableOpacity,
   Dimensions
 } from "react-native";
@@ -202,32 +203,11 @@ class Explore extends Component {
                   <View
                     style={{
                       width: width - 40,
-                      height: 200,
+                      height: 310,
                       marginTop: 20
                     }}
                   >
-                    {/*  <Image
-                      style={{
-                        flex: 1,
-                        width: null,
-                        height: null,
-                        borderRadius: 5,
-                        borderWidth: 1,
-                        borderColor: "#dddddd",
-                        resizeMode: "cover"
-                      }}
-                      source={require("../../assets/Posters/big.jpg")}
-                    /> */}
-
-                    <VideoPlayerView
-                      /*  videoIds={[
-                        "HcXNPI-IPPM",
-                        "XXlZfc1TrD0",
-                        "czcjU1w-c6k",
-                        "uMK0prafzw0"
-                      ]} */
-                      videoId="KVZ-P-ZI6W4"
-                    />
+                    <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
                   </View>
                 </View>
                 {/* end : big image section  */}
@@ -328,3 +308,4 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+//#1A1A1A background theme

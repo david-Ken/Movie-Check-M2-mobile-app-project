@@ -6,24 +6,30 @@ class VideoPlayerView extends Component {
   render() {
     return (
       <YouTube
+        style={styles.youtubeContainer}
         apiKey="AIzaSyCYn-KfJL-B5ri2uQhimzd1Bj9U78GYqlQ"
-        videoId={this.props.videoId} // The YouTube video ID
-        //    play={true} // control playback of video with true/false
-        fullscreen={false} // control whether the video should play in fullscreen or inline
-        //      loop={true} // control whether the video should loop when ended
+        videoId={this.props.videoId}
+        playlistId={this.props.playlistId}
+        play={true}
+        fullscreen={false}
+        // loop={true}
         onReady={e => this.setState({ isReady: true })}
         onChangeState={e => this.setState({ status: e.state })}
         onChangeQuality={e => this.setState({ quality: e.quality })}
         onError={e => this.setState({ error: e.error })}
-        style={{ alignSelf: "stretch", height: 300 }}
+        style={{ alignSelf: "stretch", height: 300, marginVertical: 10 }}
       />
     );
   }
 }
-
+//videoId="Y_JGZTlUbZg"
+//https://www.youtube.com/watch?v=f6RDB2uYMqU&list=PL1DD10E84B9B08A35
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  youtubeContainer: {
+    borderRadius: 0.5
   }
 });
 

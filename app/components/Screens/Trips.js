@@ -8,11 +8,14 @@ import {
   Dimensions,
   BackHandler,
   ImageBackground,
+  FlatList,
   TouchableOpacity
 } from "react-native";
 import { Icon } from "react-native-elements";
 import MaterialTabs from "react-native-material-tabs";
-const { height, width } = Dimensions.get("window");
+import VideoPlayerView from "./VideoPlayerView";
+
+const { width } = Dimensions.get("window");
 
 class Trips extends Component {
   componentDidMount() {
@@ -98,7 +101,6 @@ class Trips extends Component {
                 <Image
                   style={{
                     flex: 1,
-
                     width: null,
                     height: null,
                     resizeMode: "cover"
@@ -174,11 +176,61 @@ class Trips extends Component {
             {/*   end : movie info  */}
           </View>
         ) : this.state.selectedTab === 1 ? (
-          <Text style={{ fontWeight: "bold", marginVertical: 10 }}>
-            Two Two
-          </Text>
+          <View style={{ marginHorizontal: 20 }}>
+            <FlatList
+              data={[
+                { title: "Title Text", key: "item1" },
+                { title: "Title Text 2", key: "item2" },
+                { title: "Title Text", key: "item3" },
+                { title: "Title Text", key: "item4" },
+                { title: "Title Text", key: "item5" }
+              ]}
+              horizontal={false}
+              numColumns={2}
+              renderItem={({ item, separators }) => (
+                <TouchableOpacity>
+                  <View style={styles.item_wrapper}>
+                    <View style={{ flex: 2 }}>
+                      <Image
+                        source={require("../../assets/Posters/2.jpg")}
+                        style={styles.item}
+                      />
+                    </View>
+                    <View style={styles.actor_text}>
+                      <Text style={{ textAlign: "left" }}>
+                        Brie Larson {"\n\n"}Carol Danvers / Vers / Captain
+                        Marvel
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
         ) : (
-          <Text>Three Three </Text>
+          /*  <View style={{ margin: 20, marginBottom: 40 }}>
+            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+          </View> */
+
+          <FlatList
+            data={[
+              { title: "Title Text", key: "item1" },
+              { title: "Title Text 2", key: "item2" },
+              { title: "Title Text", key: "item3" },
+              { title: "Title Text", key: "item4" },
+              { title: "Title Text", key: "item5" }
+            ]}
+            horizontal={false}
+            numColumns={1}
+            renderItem={({ item, separators }) => (
+              <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+            )}
+          />
         )}
       </View>
     );
@@ -218,5 +270,17 @@ const styles = StyleSheet.create({
   },
   tabActiveText: {
     fontWeight: "bold"
-  }
+  },
+  item_wrapper: {
+    height: 300,
+    width: width / 2 - 40,
+    marginHorizontal: 10
+  },
+  item: {
+    flex: 1,
+    height: null,
+    width: null,
+    resizeMode: "cover"
+  },
+  actor_text: { flex: 1, paddingLeft: 40 }
 });
