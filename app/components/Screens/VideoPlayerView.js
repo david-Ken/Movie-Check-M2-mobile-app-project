@@ -10,7 +10,7 @@ class VideoPlayerView extends Component {
         apiKey="AIzaSyCYn-KfJL-B5ri2uQhimzd1Bj9U78GYqlQ"
         videoId={this.props.videoId}
         playlistId={this.props.playlistId}
-        play={true}
+        // play={false}
         fullscreen={false}
         // loop={true}
         onReady={e => this.setState({ isReady: true })}

@@ -4,6 +4,8 @@
 //review
 //https://api.themoviedb.org/3/movie/299537/reviews?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&page=1
 
+//https://www.youtube.com/watch?v=SUXWAEX2jlg
+
 async function getMoviesByYear(numberOfbPages, year) {
   const url = `https://api.themoviedb.org/3/discover/movie?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${numberOfbPages}&year=${year}`;
   const response = await fetch(url);
@@ -14,7 +16,6 @@ async function getMoviesByYear(numberOfbPages, year) {
     console.log(e);
   }
 }
-//https://www.youtube.com/watch?v=SUXWAEX2jlg
 
 async function getData(url) {
   const response = await fetch(url);
@@ -146,24 +147,3 @@ const movies = [
     genre: "Comedy"
   }
 ];
-/* 
-export const final = [
-  {
-    vote_count: 1745,
-    id: 490132,
-    video: false,
-    vote_average: 8.3,
-    title: "Green Book",
-    popularity: 271.065,
-    poster_path: "/7BsvSuDQuoqhWmU2fL7W2GOcZHU.jpg",
-    original_language: "en",
-    original_title: "Green Book",
-    genre_ids: [18, 35, 10402],
-    backdrop_path: "/78PjwaykLY2QqhMfWRDvmfbC6EV.jpg",
-    adult: false,
-    overview:
-      "Tony Lip, a bouncer in 1962, is hired to drive pianist Don Shirley on a tour through the Deep South in the days when African Americans, forced to find alternate accommodations and services due to segregation laws below the Mason-Dixon Line, relied on a guide called The Negro Motorist Green Book.",
-    release_date: "2018-11-16"
-  }
-];
- */

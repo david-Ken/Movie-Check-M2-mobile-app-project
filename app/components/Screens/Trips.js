@@ -14,22 +14,18 @@ import {
 import { Icon } from "react-native-elements";
 import MaterialTabs from "react-native-material-tabs";
 import VideoPlayerView from "./VideoPlayerView";
+import Explore from "./Explore";
 
 const { width } = Dimensions.get("window");
 
 class Trips extends Component {
   componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.handleBackPress);
+    console.log("====================trips====================");
+    this.setState({
+      movieToDisplay: [this.props.navigation.getParam("movie")]
+    });
   }
 
-  componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.handleBackPress);
-  }
-
-  handleBackPress = () => {
-    this.goBack(); // works best when the goBack is async
-    return true;
-  };
   state = {
     selectedTab: 0
   };
@@ -38,7 +34,8 @@ class Trips extends Component {
     this.setState({ selectedTab });
   };
   render() {
-    const { goBack } = this.props.navigation;
+    console.log(this.state.movieToDisplay);
+    console.log(this.props.navigation.getParam("id"));
     return (
       <View style={StyleSheet.container}>
         <ImageBackground
@@ -57,7 +54,10 @@ class Trips extends Component {
             <TouchableOpacity>
               <Icon
                 name="arrow-back"
-                onPress={() => goBack()}
+                /*   onPress={() => goBack()}*/
+                onPress={() => {
+                  this.props.navigation.navigate("Explore");
+                }}
                 size={28}
                 color="white"
               />

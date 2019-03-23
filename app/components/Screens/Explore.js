@@ -16,6 +16,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Category from "./Explore/Category";
+import Trips from "./Trips";
 import VideoPlayerView from "./VideoPlayerView";
 import { movies, getMoviesByYear, getData, initializeEmptyArray } from "./data";
 
@@ -23,12 +24,14 @@ import { movies, getMoviesByYear, getData, initializeEmptyArray } from "./data";
 // "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
 const { width } = Dimensions.get("window");
 const baseImageURL = "https://image.tmdb.org/t/p/w500/";
-const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&page=1&append_to_response=videos`;
+const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&page=1`;
 
 class Explore extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //selected movie
+      movie: null,
       isLoading: true,
       loader1: true,
       loader2: false,
@@ -36,6 +39,20 @@ class Explore extends Component {
       nowPlayingMovieData: null,
       dataSource: movies
     };
+  }
+
+  //open movie in new screen (movieDetails scren)
+  getMovieDetails(item, navigate) {
+    this.setState({
+      movie: item
+    });
+    console.log(this.state.movie);
+    if (this.state.movie !== null) {
+      //  this.props.navigation.navigate("Trips", [this.state.movie]);
+      // navigate("Trips", [this.state.movie]);
+      //navigate("Trips", { id: item.title });
+      navigate("Trips", { id: item });
+    }
   }
 
   componentWillMount() {
@@ -63,7 +80,6 @@ class Explore extends Component {
 
     // retrieve "now playing movies"
     getData(nowPlayingMovieUrl).then(data => {
-      //console.log(data);
       this.setState({
         nowPlayingMovieData: data.results,
         loader2: false
@@ -71,10 +87,11 @@ class Explore extends Component {
     });
 
     //remove loader if async data are ready
-    if (!(this.state.loader1 && this.state.loader2)) {
+    if ((this.state.loader1 && this.state.loader2) === false) {
       this.setState({
         isLoading: false
       });
+      noMore = false;
     }
   }
 
@@ -89,6 +106,8 @@ class Explore extends Component {
         </View>
       );
     } else {
+      const { navigate } = this.props.navigation;
+      const { params } = this.props.navigation.state;
       return (
         <SafeAreaView style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>
@@ -237,7 +256,9 @@ class Explore extends Component {
                     horizontal={true}
                     data={this.state.nowPlayingMovieData}
                     renderItem={({ item, separators }) => (
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => this.getMovieDetails(item, navigate)}
+                      >
                         <Category
                           imageUri={{
                             uri: baseImageURL + item.poster_path
