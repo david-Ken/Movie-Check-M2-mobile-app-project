@@ -1,214 +1,347 @@
 import React, { Component } from "react";
 import {
-  Button,
+  //Button,
   Image,
   StyleSheet,
   Text,
   View,
   Dimensions,
-  BackHandler,
+  ScrollView,
   ImageBackground,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator,
+  Linking
 } from "react-native";
-import { Icon } from "react-native-elements";
+import { Icon, Button, Rating, AirbnbRating } from "react-native-elements";
 import MaterialTabs from "react-native-material-tabs";
 import VideoPlayerView from "./VideoPlayerView";
 import Explore from "./Explore";
 
+import {
+  baseImageURL,
+  getData,
+  movieDatabaseApiKey,
+  secondApiKey
+} from "./data";
+
 const { width } = Dimensions.get("window");
 
 class Trips extends Component {
-  componentDidMount() {
-    console.log("====================trips====================");
-    this.setState({
-      movieToDisplay: [this.props.navigation.getParam("movie")]
-    });
+  constructor(props) {
+    super(props);
+    this.state = {
+      details: null,
+      actors: null,
+      crew: null,
+      selectedTab: 0,
+      isloading: true
+    };
   }
-
-  state = {
-    selectedTab: 0
-  };
 
   setTab = selectedTab => {
     this.setState({ selectedTab });
   };
+
+  componentDidMount() {
+    //initialization of movie info got from previous component
+    this.setState({
+      vote_count: this.props.navigation.getParam("id").vote_count,
+      id: this.props.navigation.getParam("id").id,
+      vote_average: this.props.navigation.getParam("id").vote_average,
+      title: this.props.navigation.getParam("id").title,
+      popularity: this.props.navigation.getParam("id").popularity,
+      poster_path: this.props.navigation.getParam("id").poster_path,
+      original_language: this.props.navigation.getParam("id").original_language,
+      original_title: this.props.navigation.getParam("id").original_title,
+      //  genre: this.props.navigation.getParam("id").genre_ids,
+      backdrop_path: this.props.navigation.getParam("id").backdrop_path,
+      overview: this.props.navigation.getParam("id").overview,
+      release_date: this.props.navigation.getParam("id").release_date
+    });
+
+    const clickedMovieUrl = `https://api.themoviedb.org/3/movie/
+      ${this.props.navigation.getParam("id").id} +
+      ?api_key=${movieDatabaseApiKey}&language=en-US`;
+
+    const clickedMovieActorsUrl = `https://api.themoviedb.org/3/movie/ ${
+      this.props.navigation.getParam("id").id
+    }/credits?api_key=${movieDatabaseApiKey}`;
+
+    //getting movie by id
+    getData(clickedMovieUrl).then(data => {
+      this.setState({
+        details: data
+      });
+    });
+
+    //getting movie actors by id
+    getData(clickedMovieActorsUrl).then(data => {
+      this.setState({
+        actors: data.cast,
+        crew: data.crew
+      });
+      //  console.log(this.state.genres);
+    });
+  }
+
   render() {
-    console.log(this.state.movieToDisplay);
-    console.log(this.props.navigation.getParam("id"));
-    return (
-      <View style={StyleSheet.container}>
-        <ImageBackground
-          source={require("../../assets//Posters/backdrop.jpg")}
-          style={styles.backdropImageView}
+    if (
+      this.state.details === null ||
+      this.state.actors === null ||
+      this.state.crew === null
+    ) {
+      return (
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center"
+          }}
         >
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "flex-start",
-              padding: 10
-            }}
-          >
-            <TouchableOpacity>
-              <Icon
-                name="arrow-back"
-                /*   onPress={() => goBack()}*/
-                onPress={() => {
-                  this.props.navigation.navigate("Explore");
-                }}
-                size={28}
-                color="white"
-              />
-            </TouchableOpacity>
-          </View>
-
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              justifyContent: "flex-end"
-            }}
-          >
-            <MaterialTabs
-              items={["Info", "Actors", "Trailers"]}
-              selectedIndex={this.state.selectedTab}
-              onChange={index => this.setState({ selectedTab: index })}
-              barColor="rgba(255,255,255,.1)"
-              indicatorColor="red"
-              activeTextStyle={styles.tabActiveText}
-            />
-          </View>
-        </ImageBackground>
-
-        {this.state.selectedTab === 0 ? (
-          <View>
-            <View
-              style={{
-                flexDirection: "row",
-                paddingHorizontal: 15,
-                marginBottom: 10
+          <ActivityIndicator size="large" />
+        </View>
+      );
+    } else {
+      return (
+        <ScrollView scrollEventThrottle={16}>
+          <View style={StyleSheet.container}>
+            <ImageBackground
+              source={{
+                uri: baseImageURL + this.state.backdrop_path
               }}
+              style={styles.backdropImageView}
             >
-              {/*   start : backdrop poster */}
               <View
                 style={{
-                  width: width / 3,
-                  height: 200
+                  flex: 1,
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  alignItems: "flex-start",
+                  padding: 10
                 }}
               >
-                <Image
-                  style={{
-                    flex: 1,
-                    width: null,
-                    height: null,
-                    resizeMode: "cover"
-                  }}
-                  source={require("../../assets//Posters/19.jpg")}
+                <TouchableOpacity>
+                  <Icon
+                    name="arrow-back"
+                    /*   onPress={() => goBack()}*/
+                    onPress={() => {
+                      this.props.navigation.navigate("Explore");
+                    }}
+                    size={28}
+                    color="white"
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "column",
+                  justifyContent: "flex-end"
+                }}
+              >
+                <MaterialTabs
+                  items={["Info", "Actors", "Trailers"]}
+                  selectedIndex={this.state.selectedTab}
+                  onChange={index => this.setState({ selectedTab: index })}
+                  barColor="rgba(255,255,255,.1)"
+                  indicatorColor="red"
+                  activeTextStyle={styles.tabActiveText}
                 />
               </View>
-              {/*   end : backdrop poster */}
-              {/*   start : movie info  */}
-              <View
-                style={{
-                  width: width - width / 3,
-                  height: 200,
-                  paddingHorizontal: 20
-                }}
-              >
-                <View style={styles.movie_info}>
-                  <Text style={{ fontSize: 15 }}>Informations</Text>
-                </View>
-                <View style={styles.hr} />
-                <View style={styles.movie_info}>
-                  <Icon name="info" color="#00aced" />
-                  <Text style={styles.movie_text}>Informations </Text>
-                </View>
-                <View style={styles.movie_info}>
-                  <Icon name="date-range" color="#00aced" />
-                  <Text style={styles.movie_text}> 01-05-2018 </Text>
-                </View>
-                <View style={styles.movie_info}>
-                  <Icon name="euro-symbol" color="#00aced" />
-                  <Text style={styles.movie_text}> 6.5 valorisation </Text>
-                </View>
-                <View style={styles.movie_info}>
-                  <Icon name="donut-small" color="#00aced" />
-                  <Text style={styles.movie_text}> 4100 votes</Text>
-                </View>
-                <View style={styles.movie_info}>
-                  <Icon name="computer" color="#00aced" />
-                  <Text style={styles.movie_text}>
-                    https://web.whatsapp.com/
-                  </Text>
-                </View>
-                <View style={{ width: "80%" }}>
-                  <Button
-                    onPress={() => goBack()}
-                    title="Purchase"
-                    color="red"
-                    accessibilityLabel="Learn more about this purple button"
-                  />
-                </View>
-              </View>
-            </View>
-            {/*   start : movie summary  */}
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "column",
-                padding: 20
-              }}
-            >
-              <Text style={{ fontWeight: "bold", marginTop: 10, fontSize: 20 }}>
-                Overview
-              </Text>
-              <View style={styles.hr} />
-              <Text style={{ textAlign: "justify" }}>
-                A common misconception is that RNFirebase provides social and
-                login out of the box. This is somewhat true, it leaves the
-                implementation of the login provider up to the user and only
-                signs the user in once the provider data has been returned.
-              </Text>
-            </View>
-            {/*   end : movie summary  */}
-            {/*   end : movie info  */}
-          </View>
-        ) : this.state.selectedTab === 1 ? (
-          <View style={{ marginHorizontal: 20 }}>
-            <FlatList
-              data={[
-                { title: "Title Text", key: "item1" },
-                { title: "Title Text 2", key: "item2" },
-                { title: "Title Text", key: "item3" },
-                { title: "Title Text", key: "item4" },
-                { title: "Title Text", key: "item5" }
-              ]}
-              horizontal={false}
-              numColumns={2}
-              renderItem={({ item, separators }) => (
-                <TouchableOpacity>
-                  <View style={styles.item_wrapper}>
-                    <View style={{ flex: 2 }}>
-                      <Image
-                        source={require("../../assets/Posters/2.jpg")}
-                        style={styles.item}
-                      />
-                    </View>
-                    <View style={styles.actor_text}>
-                      <Text style={{ textAlign: "left" }}>
-                        Brie Larson {"\n\n"}Carol Danvers / Vers / Captain
-                        Marvel
+            </ImageBackground>
+
+            {this.state.selectedTab === 0 ? (
+              <View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    paddingHorizontal: 15,
+                    marginBottom: 10
+                  }}
+                >
+                  {/*   start : backdrop poster */}
+                  <View
+                    style={{
+                      width: width / 3,
+                      height: 200
+                    }}
+                  >
+                    <Image
+                      style={{
+                        flex: 1,
+                        width: null,
+                        height: null,
+                        resizeMode: "cover"
+                      }}
+                      source={{
+                        uri: baseImageURL + this.state.poster_path
+                      }}
+                    />
+                  </View>
+                  {/*   end : backdrop poster */}
+                  {/*   start : movie info  */}
+                  <View
+                    style={{
+                      width: width - width / 3,
+                      height: 200,
+                      paddingHorizontal: 20
+                    }}
+                  >
+                    <View style={styles.movie_info}>
+                      <Text
+                        style={{
+                          fontSize: 15,
+                          textAlign: "center",
+                          fontWeight: "bold"
+                        }}
+                      >
+                        {this.state.title}
                       </Text>
                     </View>
+
+                    <View style={styles.hr} />
+
+                    <View style={styles.movie_info}>
+                      <Icon name="home" color="#00aced" />
+                      <Text style={styles.movie_text}>
+                        {this.state.details.production_companies[0].name}
+                      </Text>
+                    </View>
+
+                    <View style={styles.movie_info}>
+                      <Icon name="language" color="#00aced" />
+                      <Text style={styles.movie_text}>
+                        {
+                          (this.state.original_language = "en"
+                            ? "English VO"
+                            : this.state.original_language + " VO")
+                        }
+                      </Text>
+                    </View>
+                    <View style={styles.movie_info}>
+                      <Icon name="date-range" color="#00aced" />
+                      <Text style={styles.movie_text}>
+                        {this.state.release_date}
+                      </Text>
+                    </View>
+                    <View style={styles.movie_info}>
+                      <Icon name="timer" color="#00aced" />
+                      <Text style={styles.movie_text}>
+                        {(this.state.details.runtime / 60).toFixed(2)} hours
+                      </Text>
+                    </View>
+
+                    <View style={styles.movie_info}>
+                      <Icon name="thumbs-up-down" color="#00aced" />
+                      <Text style={styles.movie_text}>
+                        {this.state.vote_average} vote average
+                      </Text>
+                    </View>
+                    <View style={styles.movie_info}>
+                      <Icon name="computer" color="#00aced" />
+                      <Text style={styles.movie_text}>
+                        {this.state.details.tagline}
+                      </Text>
+                    </View>
+                    <View style={{ width: "80%" }}>
+                      <Button
+                        onPress={() =>
+                          Linking.openURL(this.state.details.homepage)
+                        }
+                        title="DETAILS"
+                        color="red"
+                        accessibilityLabel="more informations on the movies"
+                      />
+                    </View>
                   </View>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-        ) : (
-          /*  <View style={{ margin: 20, marginBottom: 40 }}>
+                </View>
+                {/*   start : movie summary  */}
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    padding: 20
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      marginTop: 10,
+                      fontSize: 20
+                    }}
+                  >
+                    Overview
+                  </Text>
+                  <View style={styles.hr} />
+
+                  <FlatList
+                    data={this.state.details.genres}
+                    horizontal={false}
+                    numColumns={4}
+                    style={{ marginBottom: 5 }}
+                    renderItem={({ item, separators }) => (
+                      <View style={{ marginHorizontal: 5 }}>
+                        <Button
+                          title={item.name}
+                          color="red"
+                          style={{ width: "50%" }}
+                          type="outline"
+                        />
+                      </View>
+                    )}
+                  />
+
+                  <Text style={{ textAlign: "justify" }}>
+                    {this.state.overview}
+                  </Text>
+                  <AirbnbRating
+                    style={{ margin: 0, padding: 0, fontSize: 14 }}
+                    count={5}
+                    /*   reviews={[
+                      "Terrible",
+                      "Bad ",
+                      "Okay",
+                      "Good",
+                      "Great"
+                    ]} */
+                    defaultRating={11}
+                    size={20}
+                  />
+                </View>
+                {/*   end : movie summary  */}
+                {/*   end : movie info  */}
+              </View>
+            ) : this.state.selectedTab === 1 ? (
+              <View style={{ marginHorizontal: 20 }}>
+                <FlatList
+                  data={this.state.actors}
+                  horizontal={false}
+                  numColumns={2}
+                  renderItem={({ item, separators }) => (
+                    <TouchableOpacity>
+                      <View style={styles.item_wrapper}>
+                        <View style={{ flex: 2 }}>
+                          <Image
+                            source={{
+                              uri: baseImageURL + item.profile_path
+                            }}
+                            style={styles.item}
+                          />
+                        </View>
+                        <View style={styles.actor_text}>
+                          <Text style={{ textAlign: "left" }}>
+                            {item.name} {"\n\n"} {item.character}
+                          </Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : (
+              /*  <View style={{ margin: 20, marginBottom: 40 }}>
             <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
             <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
             <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
@@ -217,23 +350,25 @@ class Trips extends Component {
             <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
           </View> */
 
-          <FlatList
-            data={[
-              { title: "Title Text", key: "item1" },
-              { title: "Title Text 2", key: "item2" },
-              { title: "Title Text", key: "item3" },
-              { title: "Title Text", key: "item4" },
-              { title: "Title Text", key: "item5" }
-            ]}
-            horizontal={false}
-            numColumns={1}
-            renderItem={({ item, separators }) => (
-              <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+              <FlatList
+                data={[
+                  { title: "Title Text", key: "item1" },
+                  { title: "Title Text 2", key: "item2" },
+                  { title: "Title Text", key: "item3" },
+                  { title: "Title Text", key: "item4" },
+                  { title: "Title Text", key: "item5" }
+                ]}
+                horizontal={false}
+                numColumns={1}
+                renderItem={({ item, separators }) => (
+                  <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+                )}
+              />
             )}
-          />
-        )}
-      </View>
-    );
+          </View>
+        </ScrollView>
+      );
+    }
   }
 }
 
@@ -266,7 +401,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#CDCDCD",
     borderBottomWidth: 0.8,
     marginVertical: 10,
-    paddingHorizontal: 20
+    paddingHorizontal: 10
   },
   tabActiveText: {
     fontWeight: "bold"

@@ -18,13 +18,20 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Category from "./Explore/Category";
 import Trips from "./Trips";
 import VideoPlayerView from "./VideoPlayerView";
-import { movies, getMoviesByYear, getData, initializeEmptyArray } from "./data";
+import {
+  baseImageURL,
+  movies,
+  getMoviesByYear,
+  getData,
+  initializeEmptyArray,
+  movieDatabaseApiKey
+} from "./data";
 
 // "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
 // "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
 const { width } = Dimensions.get("window");
-const baseImageURL = "https://image.tmdb.org/t/p/w500/";
-const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=96e53b76cf1cedd470c0a21126e12d42&language=en-US&page=1`;
+
+const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${movieDatabaseApiKey}&language=en-US&page=1`;
 
 class Explore extends Component {
   constructor(props) {
