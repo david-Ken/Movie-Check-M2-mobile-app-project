@@ -20,7 +20,7 @@
 
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
-//import { Rating, AirbnbRating } from "react-native-elements";
+
 const { height, width } = Dimensions.get("window");
 class Item extends Component {
   render() {

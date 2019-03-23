@@ -51,6 +51,7 @@ function initializeEmptyArray(nb) {
   }
   return array;
 }
+
 //export
 
 module.exports = {

@@ -17,6 +17,7 @@ import { Icon, Button, Rating, AirbnbRating } from "react-native-elements";
 import MaterialTabs from "react-native-material-tabs";
 import VideoPlayerView from "./VideoPlayerView";
 import Explore from "./Explore";
+import Category from "./Explore/Category";
 
 import {
   baseImageURL,
@@ -34,6 +35,8 @@ class Trips extends Component {
       details: null,
       actors: null,
       crew: null,
+      movie: null,
+      recommanded: null,
       selectedTab: 0,
       isloading: true
     };
@@ -42,6 +45,22 @@ class Trips extends Component {
   setTab = selectedTab => {
     this.setState({ selectedTab });
   };
+
+  //open movie in new screen (movieDetails scren)
+  // ********************************************* neeed to update props and state **************************************
+  getMovieDetails(item) {
+    this.setState({
+      details: null,
+      actors: null,
+      crew: null,
+      movie: null,
+      trailers: null,
+      recommanded: null,
+      selectedTab: 0,
+      isloading: true
+    });
+    this.props.navigation.setParams({ id: item });
+  }
 
   componentDidMount() {
     //initialization of movie info got from previous component
@@ -60,36 +79,60 @@ class Trips extends Component {
       release_date: this.props.navigation.getParam("id").release_date
     });
 
-    const clickedMovieUrl = `https://api.themoviedb.org/3/movie/
+    const CLICKED_MOVIE_URL = `https://api.themoviedb.org/3/movie/
       ${this.props.navigation.getParam("id").id} +
       ?api_key=${movieDatabaseApiKey}&language=en-US`;
 
-    const clickedMovieActorsUrl = `https://api.themoviedb.org/3/movie/ ${
+    const CLICKED_MOVIE_ACTORS_URL = `https://api.themoviedb.org/3/movie/ ${
       this.props.navigation.getParam("id").id
     }/credits?api_key=${movieDatabaseApiKey}`;
 
+    const RECOMMANDATION_URL = `https://api.themoviedb.org/3/movie/  ${
+      this.props.navigation.getParam("id").id
+    }/recommendations?api_key=${movieDatabaseApiKey}&language=en-US&page=1`;
+
+    const TRAILERS = `https://api.themoviedb.org/3/movie/${
+      this.props.navigation.getParam("id").id
+    }/videos?api_key=${movieDatabaseApiKey}&language=en-US`;
+
     //getting movie by id
-    getData(clickedMovieUrl).then(data => {
+    getData(CLICKED_MOVIE_URL).then(data => {
       this.setState({
         details: data
       });
     });
 
     //getting movie actors by id
-    getData(clickedMovieActorsUrl).then(data => {
+    getData(CLICKED_MOVIE_ACTORS_URL).then(data => {
       this.setState({
         actors: data.cast,
         crew: data.crew
       });
-      //  console.log(this.state.genres);
+    });
+
+    //getting movie recommandation
+    getData(RECOMMANDATION_URL).then(data => {
+      this.setState({
+        recommanded: data.results
+      });
+    });
+
+    //getting TRAILERS recommandation
+    getData(TRAILERS).then(data => {
+      this.setState({
+        trailers: data.results
+      });
     });
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
     if (
       this.state.details === null ||
       this.state.actors === null ||
-      this.state.crew === null
+      this.state.crew === null ||
+      this.state.trailers === null
     ) {
       return (
         <View
@@ -309,6 +352,23 @@ class Trips extends Component {
                     defaultRating={11}
                     size={20}
                   />
+
+                  <FlatList
+                    style={{ marginTop: 20 }}
+                    horizontal={true}
+                    data={this.state.recommanded}
+                    renderItem={({ item, separators }) => (
+                      <TouchableOpacity
+                        onPress={() => this.getMovieDetails(item, navigate)}
+                      >
+                        <Category
+                          imageUri={{
+                            uri: baseImageURL + item.poster_path
+                          }}
+                        />
+                      </TouchableOpacity>
+                    )}
+                  />
                 </View>
                 {/*   end : movie summary  */}
                 {/*   end : movie info  */}
@@ -341,27 +401,13 @@ class Trips extends Component {
                 />
               </View>
             ) : (
-              /*  <View style={{ margin: 20, marginBottom: 40 }}>
-            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
-            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
-            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
-            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
-            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
-            <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
-          </View> */
-
               <FlatList
-                data={[
-                  { title: "Title Text", key: "item1" },
-                  { title: "Title Text 2", key: "item2" },
-                  { title: "Title Text", key: "item3" },
-                  { title: "Title Text", key: "item4" },
-                  { title: "Title Text", key: "item5" }
-                ]}
+                style={{ marginHorizontal: 20 }}
+                data={this.state.trailers}
                 horizontal={false}
                 numColumns={1}
                 renderItem={({ item, separators }) => (
-                  <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+                  <VideoPlayerView videoId={item.key} />
                 )}
               />
             )}

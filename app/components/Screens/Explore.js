@@ -27,8 +27,6 @@ import {
   movieDatabaseApiKey
 } from "./data";
 
-// "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
-// "https://image.tmdb.org/t/p/w500/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg"
 const { width } = Dimensions.get("window");
 
 const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${movieDatabaseApiKey}&language=en-US&page=1`;
