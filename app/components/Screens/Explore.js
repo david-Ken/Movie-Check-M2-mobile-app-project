@@ -53,9 +53,6 @@ class Explore extends Component {
     });
     console.log(this.state.movie);
     if (this.state.movie !== null) {
-      //  this.props.navigation.navigate("Trips", [this.state.movie]);
-      // navigate("Trips", [this.state.movie]);
-      //navigate("Trips", { id: item.title });
       navigate("Trips", { id: item });
     }
   }
@@ -112,7 +109,7 @@ class Explore extends Component {
       );
     } else {
       const { navigate } = this.props.navigation;
-      const { params } = this.props.navigation.state;
+
       return (
         <SafeAreaView style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>

@@ -7,6 +7,7 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import io.invertase.firebase.RNFirebasePackage;
 
+
 public class MainActivity extends ReactActivity {
 
     /**
@@ -17,4 +18,6 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "Movieswatch";
     }
+
+   
 }

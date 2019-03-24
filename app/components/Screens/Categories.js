@@ -2,162 +2,142 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
-  TextInput,
   View,
   FlatList,
-  Platform,
-  ScrollView,
   TouchableOpacity
 } from "react-native";
-
-import Icon from "react-native-vector-icons/Ionicons";
-import { movies } from "./data";
-import { Profile } from "./Profile";
-import { Item } from "./Explore/Item";
+import { Icon, Header } from "react-native-elements";
 
 class Categories extends Component {
   constructor() {
     super();
     this.state = {
-      dataSource: null
+      genres: [
+        {
+          id: 28,
+          name: "Action"
+        },
+        {
+          id: 12,
+          name: "Adventure"
+        },
+        {
+          id: 16,
+          name: "Animation"
+        },
+        {
+          id: 35,
+          name: "Comedy"
+        },
+        {
+          id: 80,
+          name: "Crime"
+        },
+        {
+          id: 99,
+          name: "Documentary"
+        },
+        {
+          id: 18,
+          name: "Drama"
+        },
+        {
+          id: 10751,
+          name: "Family"
+        },
+        {
+          id: 14,
+          name: "Fantasy"
+        },
+        {
+          id: 36,
+          name: "History"
+        },
+        {
+          id: 27,
+          name: "Horror"
+        },
+        {
+          id: 10402,
+          name: "Music"
+        },
+        {
+          id: 9648,
+          name: "Mystery"
+        },
+        {
+          id: 10749,
+          name: "Romance"
+        },
+        {
+          id: 878,
+          name: "Science Fiction"
+        },
+        {
+          id: 10770,
+          name: "TV Movie"
+        },
+        {
+          id: 53,
+          name: "Thriller"
+        },
+        {
+          id: 10752,
+          name: "War"
+        },
+        {
+          id: 37,
+          name: "Western"
+        }
+      ]
     };
   }
 
-  componentDidMount = () => {
-    this.setState({
-      dataSource: movies
-    });
-  };
+  componentDidMount = () => {};
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={StyleSheet.container}>
-        <View
-          style={{
-            heigth: this.animatedHeaderHeight,
-            backgroundColor: "White",
-            borderBottomWidth: 1,
-            borderBottomColor: "#dddddd"
+        <Header
+          leftComponent={{ icon: "arrow-back", color: "#fff" }}
+          centerComponent={{
+            text: "CATEGORY",
+            style: { color: "#fff", fontSize: 20 }
           }}
-        >
-          {/* start : category search bar  */}
-          <View
-            style={{
-              flexDirection: "row",
-              padding: 10,
-              backgroundColor: "white",
-              marginHorizontal: 20,
-              shadowOffset: { width: 0, heigth: 0 },
-              shadowOpacity: 0.2,
-              elevation: 1,
-              marginTop: Platform.OS == "android" ? 30 : null
-            }}
-          >
-            <Icon name="ios-search" size={20} style={{ paddingTop: 13 }} />
-            <TextInput
-              underlineColorAndroid="transparent"
-              placeholder="Categories"
-              placeholderTextColor="grey"
-              style={{
-                flex: 1,
-                fontWeigth: "700",
-                backgroundColor: "white"
-              }}
-            />
-          </View>
-          {/* end : category search bar  */}
-
-          {/* start : two section category image  */}
-          <ScrollView horizontal={false} scrollEventThrottle={16}>
-            <View style={{ marginTop: 40 }}>
-              <Text
-                style={{
-                  fontSize: 24,
-                  fontWeight: "700",
-                  paddingHorizontal: 20
-                }}
-              >
-                Find Movies by category
-              </Text>
+          rightComponent={{ icon: "videocam", color: "#fff" }}
+        />
+        <FlatList
+          style={{ margin: 10 }}
+          horizontal={false}
+          data={this.state.genres}
+          renderItem={({ item, separators }) => (
+            <TouchableOpacity
+              onPress={() => navigate("MovieByCategory", { category: item })}
+              id={item.id}
+            >
               <View
                 style={{
-                  marginTop: 20,
-                  paddingHorizontal: 20,
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  justifyContent: "space-between"
+                  margin: 5,
+                  padding: 15,
+                  borderWidth: 1,
+                  borderRadius: 2,
+                  borderColor: "#ddd",
+                  borderBottomWidth: 0,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 2, height: 2 },
+                  shadowOpacity: 0.8,
+                  shadowRadius: 2,
+                  elevation: 1
                 }}
               >
-                <FlatList
-                  horizontal={false}
-                  numColumns={2}
-                  data={this.state.dataSource}
-                  renderItem={({ item, separators }) => (
-                    <TouchableOpacity
-                      //   onPress={() => this._onPress(item)}
-                      onPress={() => navigate("Profile", { name: "Brent" })}
-                      onShowUnderlay={separators.highlight}
-                      onHideUnderlay={separators.unhighlight}
-                    >
-                      <Item imageUri={{ uri: item.poster }} name={item.genre} />
-                    </TouchableOpacity>
-                  )}
-                />
-                {/* 
-                <TouchableOpacity>
-                  <Item
-                    imageUri={require("../../assets/Posters/14.jpg")}
-                    name="Fantasy"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Item
-                    imageUri={require("../../assets/Posters/big1.jpg")}
-                    name="Action"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Item
-                    imageUri={require("../../assets/Posters/18.jpg")}
-                    name="Comedie"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Item
-                    imageUri={require("../../assets/Posters/10.jpg")}
-                    name="Science Fiction"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Item
-                    imageUri={require("../../assets/Posters/14.jpg")}
-                    name="Fantasy"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Item
-                    imageUri={require("../../assets/Posters/big1.jpg")}
-                    name="Action"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Item
-                    imageUri={require("../../assets/Posters/18.jpg")}
-                    name="Comedie"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Item
-                    imageUri={require("../../assets/Posters/10.jpg")}
-                    name="Science Fiction"
-                  />
-                </TouchableOpacity> */}
+                <Text style={{ textAlign: "center", fontSize: 20 }}>
+                  {item.name}
+                </Text>
               </View>
-            </View>
-          </ScrollView>
-          {/* end : two category section image  */}
-        </View>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     );
   }

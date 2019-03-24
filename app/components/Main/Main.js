@@ -6,7 +6,7 @@ import firebase from "react-native-firebase";
 
 import Icon from "react-native-vector-icons/Ionicons";
 import Categories from "../Screens/Categories";
-import Inbox from "../Screens/Inbox";
+import MovieByCategory from "../Screens/MovieByCategory";
 import Trips from "../Screens/Trips";
 import Explore from "../Screens/Explore";
 import Profile from "../Screens/Profile";
@@ -75,10 +75,10 @@ export default createBottomTabNavigator({
       )
     }
   },
-  Inbox: {
-    screen: Inbox,
+  MovieByCategory: {
+    screen: MovieByCategory,
     navigationOptions: {
-      tabBarLabel: "INBOX",
+      tabBarLabel: "mo",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="ios-chatboxes-outline" color={tintColor} size={24} />
       )

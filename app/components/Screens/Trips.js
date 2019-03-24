@@ -167,7 +167,6 @@ class Trips extends Component {
                 <TouchableOpacity>
                   <Icon
                     name="arrow-back"
-                    /*   onPress={() => goBack()}*/
                     onPress={() => {
                       this.props.navigation.navigate("Explore");
                     }}
