@@ -305,7 +305,9 @@ class Explore extends Component {
                 data={this.state.apidata}
                 //   keyExtractor={item => item.id}
                 renderItem={({ item, separators }) => (
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => this.getMovieDetails(item, navigate)}
+                  >
                     <Category
                       imageUri={{
                         uri: baseImageURL + item.poster_path

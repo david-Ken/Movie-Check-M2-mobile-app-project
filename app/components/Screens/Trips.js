@@ -391,8 +391,17 @@ class Trips extends Component {
                           />
                         </View>
                         <View style={styles.actor_text}>
-                          <Text style={{ textAlign: "left" }}>
-                            {item.name} {"\n\n"} {item.character}
+                          <Text
+                            style={{
+                              textAlign: "left",
+                              fontWeight: "bold",
+                              fontSize: 16
+                            }}
+                          >
+                            {item.name}
+                          </Text>
+                          <Text style={{ textAlign: "left", paddingRight: 10 }}>
+                            {item.character}
                           </Text>
                         </View>
                       </View>
