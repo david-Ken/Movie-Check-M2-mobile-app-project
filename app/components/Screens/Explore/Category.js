@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   },
   category_wrapper: {
     height: 300,
-    width: 130,
-    marginLeft: 20,
+    width: 125,
+    marginLeft: 10,
     // borderWidth: 0.5,
     borderColor: "#dddddd"
   },

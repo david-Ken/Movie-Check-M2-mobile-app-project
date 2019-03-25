@@ -46,23 +46,87 @@ class Trips extends Component {
     this.setState({ selectedTab });
   };
 
-  //open movie in new screen (movieDetails scren)
   // ********************************************* neeed to update props and state **************************************
-  getMovieDetails(item) {
+  getMovieDetails(item, navigate) {
+    //reset state before leaving
+    this.setState({
+      details: null,
+      actors: null,
+      crew: null,
+      trailers: null,
+      recommanded: null,
+      selectedTab: 0,
+      isloading: true,
+      movie: null
+    });
+    navigate("Trips", { id: item });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.id !== this.props.navigation.getParam("id").id) {
+      const CURRENT_MOVIE_ID = this.props.navigation.getParam("id").id;
+
+      let CLICKED_MOVIE_URL = `https://api.themoviedb.org/3/movie/
+      ${CURRENT_MOVIE_ID} +
+      ?api_key=${movieDatabaseApiKey}&language=en-US`;
+
+      let CLICKED_MOVIE_ACTORS_URL = `https://api.themoviedb.org/3/movie/ ${CURRENT_MOVIE_ID}/credits?api_key=${movieDatabaseApiKey}`;
+
+      let RECOMMANDATION_URL = `https://api.themoviedb.org/3/movie/  ${CURRENT_MOVIE_ID}/recommendations?api_key=${movieDatabaseApiKey}&language=en-US&page=1`;
+
+      let TRAILERS = `https://api.themoviedb.org/3/movie/${CURRENT_MOVIE_ID}/videos?api_key=${movieDatabaseApiKey}&language=en-US`;
+
+      this.setState({
+        details: null,
+        actors: null,
+        crew: null,
+        movie: null,
+        recommanded: null,
+        selectedTab: 0,
+        isloading: true
+      });
+
+      //getting movie by id
+      getData(CLICKED_MOVIE_URL).then(data => {
+        this.setState({
+          details: data
+        });
+      });
+
+      //getting movie actors by id
+      getData(CLICKED_MOVIE_ACTORS_URL).then(data => {
+        this.setState({
+          actors: data.cast,
+          crew: data.crew
+        });
+      });
+
+      //getting movie recommandation
+      getData(RECOMMANDATION_URL).then(data => {
+        this.setState({
+          recommanded: data.results
+        });
+      });
+
+      //getting TRAILERS recommandation
+      getData(TRAILERS).then(data => {
+        this.setState({
+          trailers: data.results
+        });
+      });
+    }
+  }
+
+  componentDidMount() {
     this.setState({
       details: null,
       actors: null,
       crew: null,
       movie: null,
-      trailers: null,
       recommanded: null,
       selectedTab: 0,
       isloading: true
     });
-    this.props.navigation.setParams({ id: item });
-  }
-
-  componentDidMount() {
     //initialization of movie info got from previous component
     this.setState({
       vote_count: this.props.navigation.getParam("id").vote_count,
