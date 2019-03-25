@@ -30,6 +30,7 @@ import {
 const { width } = Dimensions.get("window");
 
 const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${movieDatabaseApiKey}&language=en-US&page=1`;
+const MOVIE_FROM_2017 = `https://api.themoviedb.org/3/discover/movie?api_key=${movieDatabaseApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&year=2016`;
 
 class Home extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class Home extends Component {
       loader2: false,
       apidata: initializeEmptyArray(10),
       nowPlayingMovieData: null,
+      mostRated: null,
       dataSource: movies
     };
   }
@@ -87,7 +89,12 @@ class Home extends Component {
         loader2: false
       });
     });
-
+    //get movie from 2017
+    getData(MOVIE_FROM_2017).then(data => {
+      this.setState({
+        mostRated: data.results
+      });
+    });
     //remove loader if async data are ready
     if ((this.state.loader1 && this.state.loader2) === false) {
       this.setState({
@@ -170,7 +177,24 @@ class Home extends Component {
                 </Text>
                 {/* start : CATEGORY  */}
                 <View style={{ height: 220, marginTop: 20 }}>
-                  <ScrollView
+                  <FlatList
+                    //style={{ marginTop: 20 }}
+                    horizontal={true}
+                    data={this.state.mostRated}
+                    renderItem={({ item, separators }) => (
+                      <TouchableOpacity
+                        onPress={() => this.getMovieDetails(item, navigate)}
+                      >
+                        <Category
+                          imageUri={{
+                            uri: baseImageURL + item.poster_path
+                          }}
+                          name={item.title}
+                        />
+                      </TouchableOpacity>
+                    )}
+                  />
+                  {/*  <ScrollView
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                   >
@@ -210,7 +234,7 @@ class Home extends Component {
                         name="Fantasy"
                       />
                     </TouchableOpacity>
-                  </ScrollView>
+                  </ScrollView> */}
                 </View>
                 {/* end : CATEGORY  */}
                 {/* start : big image section  */}
