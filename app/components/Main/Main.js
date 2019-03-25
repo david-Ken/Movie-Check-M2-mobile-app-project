@@ -8,7 +8,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Categories from "../Screens/Categories";
 import MovieByCategory from "../Screens/MovieByCategory";
 import Trips from "../Screens/Trips";
-import Explore from "../Screens/Explore";
+import Home from "../Screens/Home";
 import Profile from "../Screens/Profile";
 
 class Main extends Component {
@@ -45,12 +45,16 @@ class Main extends Component {
 }
 
 export default createBottomTabNavigator({
-  Explore: {
-    screen: Explore,
+  Home: {
+    screen: Home,
     navigationOptions: {
-      tabBarLabel: "EXPLORE",
-      tabBarIcon: ({ tinColor }) => (
-        <Icon name="ios-search-outline" colo={tinColor} size={24} />
+      tabBarLabel: "Home",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="videocam" colo={tintColor} size={24} />
+        /*  <Image
+          source={require("../../assets/airbnb.png")}
+          style={{ height: 24, width: 24, tintColor: tintColor }}
+        /> */
       )
     }
   },
@@ -59,7 +63,11 @@ export default createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "CATEGORIES",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="local_movies" color={tintColor} size={24} />
+        // <Icon name="local_movies" color={tintColor} size={24} />
+        <Image
+          source={require("../../assets/airbnb.png")}
+          style={{ height: 24, width: 24, tintColor: tintColor }}
+        />
       )
     }
   },
@@ -80,7 +88,11 @@ export default createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "mo",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-chatboxes-outline" color={tintColor} size={24} />
+        // <Icon name="ios-chatboxes-outline" color={tintColor} size={24} />
+        <Image
+          source={require("../../assets/airbnb.png")}
+          style={{ height: 24, width: 24, tintColor: tintColor }}
+        />
       )
     }
   },

@@ -31,7 +31,7 @@ const { width } = Dimensions.get("window");
 
 const nowPlayingMovieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${movieDatabaseApiKey}&language=en-US&page=1`;
 
-class Explore extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -324,7 +324,7 @@ class Explore extends Component {
   }
 }
 
-export default Explore;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {

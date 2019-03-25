@@ -16,7 +16,7 @@ import {
 import { Icon, Button, Rating, AirbnbRating } from "react-native-elements";
 import MaterialTabs from "react-native-material-tabs";
 import VideoPlayerView from "./VideoPlayerView";
-import Explore from "./Explore";
+import Home from "./Home";
 import Category from "./Explore/Category";
 
 import {
@@ -232,7 +232,7 @@ class Trips extends Component {
                   <Icon
                     name="arrow-back"
                     onPress={() => {
-                      this.props.navigation.navigate("Explore");
+                      this.props.navigation.navigate("Home");
                     }}
                     size={28}
                     color="white"
