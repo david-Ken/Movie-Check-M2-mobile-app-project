@@ -92,10 +92,6 @@ class MovieByCategory extends Component {
                 onPress={() => this.getMovieDetails(item, navigate)}
               >
                 <Category
-                  style={{
-                    height: 270,
-                    width: 100
-                  }}
                   imageUri={{
                     uri: baseImageURL + item.poster_path
                   }}
