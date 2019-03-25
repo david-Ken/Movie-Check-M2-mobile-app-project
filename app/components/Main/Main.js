@@ -50,11 +50,11 @@ export default createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "Home",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="videocam" colo={tintColor} size={24} />
-        /*  <Image
-          source={require("../../assets/airbnb.png")}
+        //   <Icon name="videocam" colo={tintColor} size={24} />
+        <Image
+          source={require("../../assets/home-icon.png")}
           style={{ height: 24, width: 24, tintColor: tintColor }}
-        /> */
+        />
       )
     }
   },
@@ -65,7 +65,7 @@ export default createBottomTabNavigator({
       tabBarIcon: ({ tintColor }) => (
         // <Icon name="local_movies" color={tintColor} size={24} />
         <Image
-          source={require("../../assets/airbnb.png")}
+          source={require("../../assets/video-player.png")}
           style={{ height: 24, width: 24, tintColor: tintColor }}
         />
       )
@@ -88,7 +88,6 @@ export default createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "mo",
       tabBarIcon: ({ tintColor }) => (
-        // <Icon name="ios-chatboxes-outline" color={tintColor} size={24} />
         <Image
           source={require("../../assets/airbnb.png")}
           style={{ height: 24, width: 24, tintColor: tintColor }}
@@ -101,24 +100,13 @@ export default createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "PROFILE",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-chatboxes-outline" color={tintColor} size={24} />
+        <Image
+          source={require("../../assets/user.png")}
+          style={{ height: 24, width: 24, tintColor: tintColor }}
+        />
       )
     }
-  } /*,
-  {
-    tabBarOptions: {
-      activeTintColor: 'red',
-      inactiveTintColor: 'grey',
-      style: {
-        backgroundColor: 'white',
-        borderTopWidth: 0,
-        shadowOffset: { width: 5, height: 3 },
-        shadowColor: 'black',
-        shadowOpacity: 0.5,
-        elevation: 5
-      }
-    }
-  }*/
+  }
 });
 
 const styles = StyleSheet.create({
