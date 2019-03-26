@@ -64,7 +64,11 @@ class MovieByCategory extends Component {
     if (this.state.categoryMovies === null) {
       return (
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center"
+          }}
         >
           <ActivityIndicator size="large" />
         </View>
@@ -88,7 +92,6 @@ class MovieByCategory extends Component {
             //   keyExtractor={item => item.id}
             renderItem={({ item, separators }) => (
               <TouchableOpacity
-                //  onPress={() => this.getMovieDetails(item, navigate)}
                 onPress={() => this.getMovieDetails(item, navigate)}
               >
                 <Category

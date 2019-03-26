@@ -210,6 +210,7 @@ class Trips extends Component {
         </View>
       );
     } else {
+      // console.log(this.state.trailers);
       return (
         <ScrollView scrollEventThrottle={16}>
           <View style={StyleSheet.container}>

@@ -43,8 +43,8 @@ class Home extends Component {
       loader2: false,
       apidata: initializeEmptyArray(10),
       nowPlayingMovieData: null,
-      mostRated: null,
-      dataSource: movies
+      movieFrom2017: null //,
+      //dataSource: movies
     };
   }
 
@@ -92,7 +92,7 @@ class Home extends Component {
     //get movie from 2017
     getData(MOVIE_FROM_2017).then(data => {
       this.setState({
-        mostRated: data.results
+        movieFrom2017: data.results
       });
     });
     //remove loader if async data are ready
@@ -106,10 +106,17 @@ class Home extends Component {
 
   render() {
     console.log(this.state.nowPlayingMovieData);
-    if (this.state.isLoading) {
+    if (
+      this.state.nowPlayingMovieData === null ||
+      this.state.movieFrom2017 === null
+    ) {
       return (
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center"
+          }}
         >
           <ActivityIndicator size="large" />
         </View>
@@ -175,12 +182,12 @@ class Home extends Component {
                 >
                   Want to discover movies, David ?
                 </Text>
-                {/* start : CATEGORY  */}
+                {/* start : movie from 2017  */}
                 <View style={{ height: 220, marginTop: 20 }}>
                   <FlatList
-                    //style={{ marginTop: 20 }}
                     horizontal={true}
-                    data={this.state.mostRated}
+                    data={this.state.movieFrom2017}
+                    showsHorizontalScrollIndicator={false}
                     renderItem={({ item, separators }) => (
                       <TouchableOpacity
                         onPress={() => this.getMovieDetails(item, navigate)}
@@ -194,49 +201,8 @@ class Home extends Component {
                       </TouchableOpacity>
                     )}
                   />
-                  {/*  <ScrollView
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                  >
-                    <TouchableOpacity>
-                      <Category
-                        imageUri={require("../../assets/Posters/0.jpg")}
-                        name="Comedy"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Category
-                        imageUri={require("../../assets/Posters/1.jpg")}
-                        name="Sci-fi"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Category
-                        imageUri={require("../../assets/Posters/2.jpg")}
-                        name="Horror"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Category
-                        imageUri={require("../../assets/Posters/3.jpg")}
-                        name="Romance"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Category
-                        imageUri={require("../../assets/Posters/4.jpg")}
-                        name="Action"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Category
-                        imageUri={require("../../assets/Posters/14.jpg")}
-                        name="Fantasy"
-                      />
-                    </TouchableOpacity>
-                  </ScrollView> */}
                 </View>
-                {/* end : CATEGORY  */}
+                {/* end : movie from 2017  */}
                 {/* start : big image section  */}
                 <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
                   <Text style={{ fontSize: 24, fontWeight: "700" }}>
@@ -280,6 +246,7 @@ class Home extends Component {
                   <FlatList
                     style={{ marginTop: 20 }}
                     horizontal={true}
+                    showsHorizontalScrollIndicator={false}
                     data={this.state.nowPlayingMovieData}
                     renderItem={({ item, separators }) => (
                       <TouchableOpacity
@@ -322,6 +289,7 @@ class Home extends Component {
               <FlatList
                 style={{ marginTop: 20 }}
                 horizontal={true}
+                showsHorizontalScrollIndicator={false}
                 //   numColumns={2}
                 data={this.state.apidata}
                 //   keyExtractor={item => item.id}
