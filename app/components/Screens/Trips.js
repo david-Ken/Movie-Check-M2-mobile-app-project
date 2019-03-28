@@ -11,7 +11,8 @@ import {
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
-  Linking
+  Linking,
+  WebView
 } from "react-native";
 import { Icon, Button, Rating, AirbnbRating } from "react-native-elements";
 import MaterialTabs from "react-native-material-tabs";
@@ -127,6 +128,7 @@ class Trips extends Component {
       selectedTab: 0,
       isloading: true
     });
+
     //initialization of movie info got from previous component
     this.setState({
       vote_count: this.props.navigation.getParam("id").vote_count,
@@ -210,7 +212,7 @@ class Trips extends Component {
         </View>
       );
     } else {
-      // console.log(this.state.trailers);
+      //console.log(this.state.trailers);
       return (
         <ScrollView scrollEventThrottle={16}>
           <View style={StyleSheet.container}>
@@ -249,7 +251,7 @@ class Trips extends Component {
                 }}
               >
                 <MaterialTabs
-                  items={["Info", "Actors", "Trailers"]}
+                  items={["Info", "Actors", "Trailers", "review"]}
                   selectedIndex={this.state.selectedTab}
                   onChange={index => this.setState({ selectedTab: index })}
                   barColor="rgba(255,255,255,.1)"
@@ -464,7 +466,12 @@ class Trips extends Component {
                           >
                             {item.name}
                           </Text>
-                          <Text style={{ textAlign: "left", paddingRight: 10 }}>
+                          <Text
+                            style={{
+                              textAlign: "left",
+                              paddingRight: 10
+                            }}
+                          >
                             {item.character}
                           </Text>
                         </View>
@@ -473,7 +480,7 @@ class Trips extends Component {
                   )}
                 />
               </View>
-            ) : (
+            ) : this.state.selectedTab === 2 ? (
               <FlatList
                 style={{ marginHorizontal: 20 }}
                 data={this.state.trailers}
@@ -481,8 +488,30 @@ class Trips extends Component {
                 numColumns={1}
                 renderItem={({ item, separators }) => (
                   <VideoPlayerView videoId={item.key} />
+
+                  /*  
+                  @TODO : replace VideoPlayerView with this comment or check for  the youtube react component bug fix 
+                  <View
+                    style={{
+                      width: width - 40,
+                      height: 310,
+                      marginTop: 20
+                    }}
+                  >
+                    <WebView
+                      javaScriptEnabled={true}
+                      source={{
+                        html: `<html><body><iframe width=${width} height='310' src='https://www.youtube.com/embed/X1DAcySv4Fo
+                      }' frameborder='0' allowfullscreen></iframe></body></html>`
+                      }}
+                    />
+                  </View> */
                 )}
               />
+            ) : (
+              <View>
+                <Text>text chat</Text>
+              </View>
             )}
           </View>
         </ScrollView>

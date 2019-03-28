@@ -11,6 +11,7 @@ class VideoPlayerView extends Component {
         videoId={this.props.videoId}
         playlistId={this.props.playlistId}
         // play={false}
+        //resumePlayAndroid={false}
         fullscreen={false}
         // loop={true}
         onReady={e => this.setState({ isReady: true })}

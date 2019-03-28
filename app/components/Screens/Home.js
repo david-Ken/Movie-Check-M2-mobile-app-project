@@ -12,7 +12,8 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  WebView
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Category from "./Explore/Category";
@@ -105,7 +106,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.state.nowPlayingMovieData);
     if (
       this.state.nowPlayingMovieData === null ||
       this.state.movieFrom2017 === null
@@ -218,7 +218,13 @@ class Home extends Component {
                       marginTop: 20
                     }}
                   >
-                    <VideoPlayerView playlistId="PL1DD10E84B9B08A35" />
+                    {/*  <VideoPlayerView playlistId="PL1DD10E84B9B08A35" /> */}
+                    <WebView
+                      javaScriptEnabled={true}
+                      source={{
+                        html: `<html><body><iframe width=${width} height='310' src='https://www.youtube.com/embed/videoseries?list=PLJ2uhd8PgVQQAJDsMDOgylDUIaABerpWJ' frameborder='0' allowfullscreen></iframe></body></html>`
+                      }}
+                    />
                   </View>
                 </View>
                 {/* end : big image section  */}

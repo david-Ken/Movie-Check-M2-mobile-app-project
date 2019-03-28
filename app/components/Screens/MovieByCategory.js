@@ -3,6 +3,8 @@ import {
   StyleSheet,
   ActivityIndicator,
   View,
+  Text,
+  Image,
   FlatList,
   TouchableOpacity
 } from "react-native";
@@ -50,18 +52,18 @@ class MovieByCategory extends Component {
       this.props.navigation.getParam("category").id
     }
 `;
-
     // retrieve movie for the current category
     getData(MOVIE_LIST_BY_CATEGORY_URL).then(data => {
       this.setState({
         categoryMovies: data.results
       });
-      console.log(this.state.categoryMovies);
+      // console.log(this.state.categoryMovies);
     });
   };
 
   render() {
-    if (this.state.categoryMovies === null) {
+    if (this.state.categoryMovies === null || this.state.listAppear === true) {
+      //console.log(this.state.latest);
       return (
         <View
           style={{
