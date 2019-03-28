@@ -74,10 +74,10 @@ export default createBottomTabNavigator({
   Trips: {
     screen: Trips,
     navigationOptions: {
-      tabBarLabel: "TRIPS",
+      tabBarLabel: "movies",
       tabBarIcon: ({ tintColor }) => (
         <Image
-          source={require("../../assets/airbnb.png")}
+          source={require("../../assets/movies-info.png")}
           style={{ height: 24, width: 24, tintColor: tintColor }}
         />
       )
@@ -86,10 +86,10 @@ export default createBottomTabNavigator({
   MovieByCategory: {
     screen: MovieByCategory,
     navigationOptions: {
-      tabBarLabel: "mo",
+      tabBarLabel: "List",
       tabBarIcon: ({ tintColor }) => (
         <Image
-          source={require("../../assets/airbnb.png")}
+          source={require("../../assets/list.png")}
           style={{ height: 24, width: 24, tintColor: tintColor }}
         />
       )

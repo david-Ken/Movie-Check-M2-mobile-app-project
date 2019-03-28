@@ -19,6 +19,7 @@ import MaterialTabs from "react-native-material-tabs";
 import VideoPlayerView from "./VideoPlayerView";
 import Home from "./Home";
 import Category from "./Explore/Category";
+import { GiftedChat } from "react-native-gifted-chat";
 
 import {
   baseImageURL,
@@ -27,7 +28,7 @@ import {
   secondApiKey
 } from "./data";
 
-const { width } = Dimensions.get("window");
+const { height, width } = Dimensions.get("window");
 
 class Trips extends Component {
   constructor(props) {
@@ -39,13 +40,20 @@ class Trips extends Component {
       movie: null,
       recommanded: null,
       selectedTab: 0,
-      isloading: true
+      isloading: true,
+      messages: []
     };
   }
 
   setTab = selectedTab => {
     this.setState({ selectedTab });
   };
+
+  wikiName(apiName) {
+    var wikiname = apiName.replace(" ", "_");
+
+    Linking.openURL(`https://fr.wikipedia.org/wiki/${wikiname}`);
+  }
 
   // ********************************************* neeed to update props and state **************************************
   getMovieDetails(item, navigate) {
@@ -119,6 +127,56 @@ class Trips extends Component {
   }
 
   componentDidMount() {
+    const MongoDB_API_KEY = "zCLFgZARvEBN2KP0CfUkn31d2Tg0Qev2";
+    /*   $.ajax({
+      url: `https://api.mlab.com/api/1/databases/moviewatch/collections/review?apiKey=${MongoDB_API_KEY}`,
+      data: JSON.stringify({
+        _id: 1,
+        text: "What a great movie !!!",
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: "React Native",
+          avatar: "https://placeimg.com/140/140/any"
+        }
+      }),
+      type: "POST",
+      contentType: "application/json",
+      success: function(data) {
+        this.setState({ messages: data });
+      }
+    });
+ */
+
+    fetch(
+      `https://api.mlab.com/api/1/databases/moviewatch/collections/review?apiKey=${MongoDB_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          _id: 1,
+          text: "What a great movie !!!",
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: "React Native",
+            avatar: "https://placeimg.com/140/140/any"
+          }
+        })
+      }
+    )
+      .then(response => response.json())
+      .then(responseJson => {
+        //  this.setState({ messages: responseJson });
+        alert("i goes");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
     this.setState({
       details: null,
       actors: null,
@@ -127,6 +185,22 @@ class Trips extends Component {
       recommanded: null,
       selectedTab: 0,
       isloading: true
+    });
+
+    //message
+    this.setState({
+      messages: [
+        {
+          _id: 1,
+          text: "What a great movie !!!",
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: "React Native",
+            avatar: "https://placeimg.com/140/140/any"
+          }
+        }
+      ]
     });
 
     //initialization of movie info got from previous component
@@ -189,6 +263,13 @@ class Trips extends Component {
         trailers: data.results
       });
     });
+  }
+
+  //on send messages
+  onSend(messages = []) {
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages)
+    }));
   }
 
   render() {
@@ -446,7 +527,10 @@ class Trips extends Component {
                   horizontal={false}
                   numColumns={2}
                   renderItem={({ item, separators }) => (
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      // wikiName={this.wikiName(item.name)}
+                      onPress={() => this.wikiName(item.name)}
+                    >
                       <View style={styles.item_wrapper}>
                         <View style={{ flex: 2 }}>
                           <Image
@@ -509,8 +593,20 @@ class Trips extends Component {
                 )}
               />
             ) : (
-              <View>
-                <Text>text chat</Text>
+              <View
+                style={{
+                  width: width,
+                  height: height / 2 + 50,
+                  backgroundColor: "#fff"
+                }}
+              >
+                <GiftedChat
+                  messages={this.state.messages}
+                  onSend={messages => this.onSend(messages)}
+                  user={{
+                    _id: 1
+                  }}
+                />
               </View>
             )}
           </View>
