@@ -148,7 +148,7 @@ class Trips extends Component {
     });
  */
 
-    fetch(
+    /*     fetch(
       `https://api.mlab.com/api/1/databases/moviewatch/collections/review?apiKey=${MongoDB_API_KEY}`,
       {
         method: "POST",
@@ -175,7 +175,7 @@ class Trips extends Component {
       })
       .catch(error => {
         console.error(error);
-      });
+      }); */
 
     this.setState({
       details: null,

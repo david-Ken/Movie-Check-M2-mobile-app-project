@@ -61,7 +61,7 @@ export default createBottomTabNavigator({
   Categories: {
     screen: Categories,
     navigationOptions: {
-      tabBarLabel: "CATEGORIES",
+      tabBarLabel: "Categories",
       tabBarIcon: ({ tintColor }) => (
         // <Icon name="local_movies" color={tintColor} size={24} />
         <Image
@@ -74,10 +74,10 @@ export default createBottomTabNavigator({
   Trips: {
     screen: Trips,
     navigationOptions: {
-      tabBarLabel: "movies",
+      tabBarLabel: "Movie",
       tabBarIcon: ({ tintColor }) => (
         <Image
-          source={require("../../assets/movies-info.png")}
+          source={require("../../assets/text-document.png")}
           style={{ height: 24, width: 24, tintColor: tintColor }}
         />
       )
@@ -98,7 +98,7 @@ export default createBottomTabNavigator({
   Profile: {
     screen: Profile,
     navigationOptions: {
-      tabBarLabel: "PROFILE",
+      tabBarLabel: "Profile",
       tabBarIcon: ({ tintColor }) => (
         <Image
           source={require("../../assets/user.png")}

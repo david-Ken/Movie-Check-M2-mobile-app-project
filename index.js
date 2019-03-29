@@ -7,9 +7,10 @@ import React, { Component } from "react";
 
 import Splashscreen from "./app/components/Splashscreen/Splashscreen";
 import Log from "./app/components/Log";
-
+console.disableYellowBox = true;
 class Starter extends Component {
   constructor(props) {
+    console.disableYellowBox = true;
     super(props);
     this.state = { currentScreen: "Splashscreen" };
     //  console.log("Start doing somme task for about 3 seconds");

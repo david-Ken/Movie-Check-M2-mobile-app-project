@@ -36,6 +36,10 @@ const MOVIE_FROM_2017 = `https://api.themoviedb.org/3/discover/movie?api_key=${m
 class Home extends Component {
   constructor(props) {
     super(props);
+    global.movieWatch = {
+      name: "David",
+      password: "****"
+    };
     this.state = {
       //selected movie
       movie: null,
@@ -180,7 +184,7 @@ class Home extends Component {
                     paddingHorizontal: 20
                   }}
                 >
-                  Want to discover movies, David ?
+                  Want to discover movies, {global.movieWatch.name}?
                 </Text>
                 {/* start : movie from 2017  */}
                 <View style={{ height: 220, marginTop: 20 }}>
