@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import firebase from "react-native-firebase";
 import { SocialIcon } from "react-native-elements";
+import { GoogleSignin } from "react-native-google-signin";
 
 export default class Login extends Component {
   state = { email: "", password: "", errorMessage: null };
@@ -44,6 +45,31 @@ export default class Login extends Component {
     this.setState({ logoHeight: 50 });
     this.setState({ addMarginBottom: 120 });
   };
+
+  async googleLogin() {
+    try {
+      // add any configuration settings here:
+      await GoogleSignin.configure();
+
+      const data = await GoogleSignin.signIn();
+
+      // create a new firebase credential with the token
+      const credential = firebase.auth.GoogleAuthProvider.credential(
+        data.idToken,
+        data.accessToken
+      );
+      // login with credential
+      const firebaseUserCredential = firebase
+        .auth()
+        .signInWithCredential(credential)
+        .then(() => this.props.navigation.navigate("Main"))
+        .catch(error => this.setState({ errorMessage: error.message }));
+
+      //console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   render() {
     return (
@@ -160,7 +186,8 @@ export default class Login extends Component {
                 {/* end : Divider with horizontal line */}
                 <TouchableOpacity
                   style={styles.buttonContainer}
-                  onPress={() => this.props.navigation.navigate("SignUp")}
+                  // onPress={() => this.props.navigation.navigate("SignUp")}
+                  onPress={() => this.googleLogin()}
                 >
                   <View style={styles.alignLogo}>
                     <Image
